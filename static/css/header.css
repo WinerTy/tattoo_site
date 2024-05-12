@@ -1,33 +1,33 @@
-.container {
-    display: flex;
-    justify-content: center;
+header {
     background-color: #161616;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
+.container {
+    display: flex;
+    justify-content: center;
+}   
 
 .footnote {
     padding: 20px 0;
     font-size: clamp(14px, 3vw, 20px);
-    font-weight: 400;
     line-height: clamp(18px, 3vw, 24px);
     font-family: 'NEXT-ART', sans-serif;
     font-weight: 600;
     color: #fff;
+    text-decoration: none;
+}
+
+.footnote:hover{
+    transition: text-shadow 0.3s ease-in-out;
+    &:hover {
+      text-shadow: 6px 6px 6px rgba(140, 139, 139, 0.5);
+    }
 }
 
 .row {
     display: flex;
     align-items: center;
     gap: 30px;
-}
-
-.row img {
-    height: 100px;
-    width: 200px;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astral tattoo</title>
+</head>
+<body>
+        {% include 'components/header.html' %}
+        {% block content %}
+        <h1>test</h1>
+        {% endblock %}
+        {% include 'components/footer.html' %}
+</body>
+<style>
+    .row {
+        display: flex;
+        flex-direction:row;
+        gap: 15px;
+    }
+    .container {
+        display: flex;
+        align-items: center;
+    }
+</style>
+</html>

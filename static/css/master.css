@@ -1,0 +1,11 @@
+.photo img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+}
+
+.master-photo img {
+    width: 500px;
+    height: 500px;
+    object-fit: cover;
+}

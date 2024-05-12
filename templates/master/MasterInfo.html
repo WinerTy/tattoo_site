@@ -1,0 +1,23 @@
+{% load static %}
+{% include "components/header.html" %}
+<link rel="stylesheet" href="{% static 'css/master.css' %}">
+<title>Мастер {{ master.name }}</title>
+<div class="master">
+    <div class="about-master"></div>
+    <div class="master-photo">
+        <img src="{{ master.photo.url }}" alt="">
+    </div>
+</div>
+<div class="master-works">
+    <h1>Работы мастера</h1>
+    {% for work in master.works.all %}
+    <div class="work-card">
+        <div class="photo">
+            <img src="{{ work.photo.url }}" alt="">
+        </div>
+    </div>
+{% empty %}
+    <p>У мастера пока нет работ</p>
+{% endfor %}
+</div>
+{% include "components/footer.html" %}

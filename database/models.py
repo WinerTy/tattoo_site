@@ -19,7 +19,9 @@ class Master(models.Model):
     name = models.CharField(max_length=20, verbose_name="Имя")
     description = models.TextField(blank=True, verbose_name="Описание")
     works = models.ManyToManyField(Works, blank=True, verbose_name="Работы мастера")
-    is_active = models.BooleanField(default=True)
+    experience = models.PositiveIntegerField(default=0, verbose_name="Стаж работы")
+    tattoo_type = models.CharField(max_length=50, verbose_name="Тип татуировок")
+    is_active = models.BooleanField(default=True, verbose_name="Отоброжать")
 
     class Meta:
         verbose_name = "Мастер"

@@ -4,16 +4,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <title>Astral tattoo</title>
 </head>
 <body>
         {% include 'components/header.html' %}
         {% block content %}
         <div class="slider"></div>
-        <div class="about-block"></div>
-        <div class="our-masters"></div>
+        <div class="about-block">
+            <div class="descriptions">
+                <h1>Тату салон в СПб</h1>
+                <p>Только <strong>уникальные татуировки</strong>! Все мастера в тату-салонах «Барака» являются художниками, а это значит, что они умеют, а главное любят рисовать! Для вас мы разработаем индивидуальный эскиз.</p>
+                <p> </p>
+                <p>Мы <strong>работаем более 13 лет</strong> и действительно хорошо разбираемся в татуировке и уверены, что именно в осознанном сотрудничестве тату-мастера и клиента рождаются по настоящему хорошие работы!</p>
+                <p> </p>
+                <p>Тысячи довольных клиентов и <a href="">реальные отзывы</a>. Мы дорожим своей репутацией!</p>
+                <p> </p>
+                <p>Работаем в любых стилях. <strong>Современное тату оборудование</strong>. Уютная, домашняя атмосфера. <strong>Стерильность</strong> и чистота. Сделаем татуировку, о которой вы мечтаете.</p>
+                <span><strong>Еще занимаемся удалением&nbsp;старых тату или перекроем их новыми&nbsp;(Cover up тату)</strong></span>
+            </div>
+            <div class="icon-container">
+                <div class="icon-row">
+                    <img src="https://img2.akspic.ru/previews/2/7/7/4/7/174772/174772-skelet-18650-past-rebro-kost-x750.jpg" alt="Иконка 1">
+                    <img src="https://img2.akspic.ru/previews/2/7/7/4/7/174772/174772-skelet-18650-past-rebro-kost-x750.jpg" alt="Иконка 2">
+                </div>
+            </div>
+            <div class="icon-container">
+                <div class="icon-row">
+                    <img src="https://img2.akspic.ru/previews/2/7/7/4/7/174772/174772-skelet-18650-past-rebro-kost-x750.jpg" alt="Иконка 3">
+                    <img src="https://img2.akspic.ru/previews/2/7/7/4/7/174772/174772-skelet-18650-past-rebro-kost-x750.jpg" alt="Иконка 4">
+                </div>
+            </div>
+        </div>
+        <div class="our-masters">
+            <div class="title">
+                <h1>Наши мастера</h1>
+            </div>
+            {% if masters %}
+                {% for master in masters %}
+                <a href="{% url 'master-info' master.pk %}">
+                    <div class="master">
+                        <div class="photo">
+                            <img src="{{ master.photo.url }}" alt="">
+                        </div>
+                        <div class="name">
+                            <h3>{{ master.name }}</h3>
+                        </div>
+                    </div>
+                </a>
+                {%endfor%}
+            {%else%}
+            <div class="master">
+                <p>В данный момент мастеров нету!</p>
+            </div>
+            {%endif%}
+        </div>
         {% endblock %}
         {% include 'components/footer.html' %}
 </body>
+<style>
 
+</style>
 </html>

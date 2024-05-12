@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    justify-content: center;
+    background-color: #161616;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.footnote {
+    padding: 20px 0;
+    font-size: clamp(14px, 3vw, 20px);
+    font-weight: 400;
+    line-height: clamp(18px, 3vw, 24px);
+    font-family: 'NEXT-ART', sans-serif;
+    font-weight: 600;
+    color: #fff;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.row img {
+    height: 100px;
+    width: 200px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footnote {
+        font-size: 16px;
+        line-height: 20px;
+    }
+}

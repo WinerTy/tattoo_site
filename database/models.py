@@ -1,10 +1,23 @@
 from django.db import models
 
 
+class Slider(models.Model):
+    photo = models.ImageField(upload_to="Slider/", verbose_name="Картинка")
+    title = models.CharField(max_length=50, verbose_name="Заголовок")
+    is_active = models.BooleanField(default=True, verbose_name="Отоброжать")
+
+    class Meta:
+        verbose_name = "Слайдер"
+        verbose_name_plural = "Слайдеры"
+
+    def __str__(self):
+        return self.title
+
+
 class Works(models.Model):
     photo = models.ImageField(upload_to="WorksPhoto/", verbose_name="Фотография")
     name = models.CharField(max_length=30, verbose_name="Название")
-    description = models.TextField(verbose_name="Описание")
+    type = models.CharField(max_length=30, verbose_name="Тип тату")
 
     class Meta:
         verbose_name = "Работа"
@@ -29,6 +42,19 @@ class Master(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SocialAccount(models.Model):
+    master = models.ForeignKey(Master, verbose_name="Мастер", on_delete=models.CASCADE, related_name='social_account')
+    icon = models.ImageField(upload_to="MastersSocial/", verbose_name="Иконка")
+    link = models.CharField(max_length=150, verbose_name="Ссылка")
+
+    class Meta:
+        verbose_name = "Социальная сеть"
+        verbose_name_plural = "Социальные сети"
+
+    def __str__(self):
+        return self.link
 
 
 class Note(models.Model):

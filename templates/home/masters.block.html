@@ -1,0 +1,12 @@
+<h1>Наши лучшие мастера</h1>
+<div class="row">
+    {% for master in masters %}
+    <div class="col-lg-4">
+        <img src="{{master.photo.url}}" alt="" class="bd-placeholder-img rounded-circle" width="140" height="140">
+        <h2 class="fw-normal">{{ master.name }}</h2>
+        <span> {{ master.tattoo_type }}</span>
+        <p>{{ master.description }}</p>
+        <p><a class="btn btn-primary" href="{% url 'master-info' master.pk %}">Подробнее &raquo;</a></p>
+    </div>
+    {% endfor %}
+</div>

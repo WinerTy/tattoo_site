@@ -1,12 +1,46 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/footer.css'%}">
 <link rel="stylesheet" href="{% static 'css/reset.css'%}">
-
+<script src="https://api-maps.yandex.ru/2.1/?apikey=d17123bd-3142-47c8-9496-8cb21e6d450f&lang=ru_RU"
+ type="text/javascript"></script>
 <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
       <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Главная</a></li>
       <li class="nav-item"><a href="{% url 'home' %}" class="nav-link px-2 text-body-secondary">Мастера</a></li>
       <li class="nav-item"><a href="{% url 'about' %}" class="nav-link px-2 text-body-secondary">О нас</a></li>
     </ul>
-    <p class="text-center text-body-secondary">&copy; 2024 Astral Tattoo, Inc</p>
+    <div class="map">
+      <div id="map"></div>
+    </div>
+    <p class="text-center text-body-secondary">&copy; 2024 BARAKA, Inc</p>
   </footer>
+
+<script>
+  ymaps.ready(init);
+  function init() {
+      var myMap = new ymaps.Map("map", {
+        center: [{{ info.latitude }}, {{ info.longitude }}],
+        zoom: 15,
+        controls: [ 'fullscreenControl'],
+        zoomRange: [10,15]
+      });
+
+      var myPlacemark = new ymaps.Placemark([{{ info.latitude }}, {{ info.longitude }}], {
+          hintContent: 'Содержимое всплывающей подсказки',
+          balloonContent: 'Содержимое балуна'
+      });
+      
+      myMap.geoObjects.add(myPlacemark);
+  }
+</script>
+
+<style>
+  .map {
+    display: flex;
+    justify-content: center;
+  }
+  #map {
+    width: 600px;
+    height: 400px;
+  }
+</style>

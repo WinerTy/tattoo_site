@@ -11,5 +11,8 @@
     <div class="container-masters">
         {% include 'home/masters.block.html' with masters=masters %}
     </div>
-    {% include 'components/footer.html' with info=info %}
+    
+{%endblock%}
+{%block footer%}
+{% include 'components/footer.html' with info=info %}
 {%endblock%}

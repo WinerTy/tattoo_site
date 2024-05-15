@@ -10,6 +10,7 @@ class Contact(models.Model):
 
 
 class AboutBlock(models.Model):
+    image = models.ImageField(upload_to="Site/AboutImages/",verbose_name="Картинка")
     title = models.CharField(max_length=50,
                              verbose_name="Заголовок")
     short_description = models.TextField(verbose_name="Краткое описание",

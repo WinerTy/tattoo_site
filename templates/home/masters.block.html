@@ -1,4 +1,5 @@
 <h1>Наши лучшие мастера</h1>
+{% if masters %}
 <div class="row">
     {% for master in masters %}
     <div class="col-lg-4">
@@ -10,3 +11,9 @@
     </div>
     {% endfor %}
 </div>
+{%else%}
+<div class="test">
+    <h1>В нашем салоне пока нет мастеров</h1>
+</div>
+
+{%endif%}

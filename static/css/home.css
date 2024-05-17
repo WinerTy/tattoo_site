@@ -30,6 +30,7 @@
 
 .container-masters, .container-about {
     display: flex;
+    flex-direction: column;
 }
 .container-masters .row {
     display: flex;
@@ -39,7 +40,14 @@
     font-family: 'NEXT-ART';
     font-weight: 600;
 }
+.container-about {
+    flex-direction: column;
+}
 
+.about-title {
+    display: flex;
+    margin-left: 30px;
+}
 
 .bi{
     width: 100%;
@@ -51,6 +59,7 @@
 
 .card-deck {
     display: flex;
+    justify-content: center;
     gap: 30px;
 }
 

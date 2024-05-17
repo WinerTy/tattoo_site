@@ -1,4 +1,5 @@
 from django.db import models
+from site_setting.models import Salon
 
 
 class Slider(models.Model):
@@ -28,7 +29,9 @@ class Works(models.Model):
 
 
 class Master(models.Model):
-    photo = models.ImageField(upload_to="MastersPhoto/", verbose_name="Фотография")
+    salon = models.ForeignKey(Salon, on_delete=models.CASCADE)
+    photo = models.ImageField(upload_to="MastersPhoto/",
+                              verbose_name="Фотография")
     name = models.CharField(max_length=20, verbose_name="Имя")
     description = models.TextField(blank=True, verbose_name="Описание")
     works = models.ManyToManyField(Works, blank=True, verbose_name="Работы мастера")

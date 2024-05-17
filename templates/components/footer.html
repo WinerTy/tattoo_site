@@ -19,13 +19,13 @@
   ymaps.ready(init);
   function init() {
       var myMap = new ymaps.Map("map", {
-        center: [{{ info.latitude }}, {{ info.longitude }}],
+        center: [{{ request.session.salon.latitude }}, {{ request.session.salon.longitude }}],
         zoom: 15,
         controls: [ 'fullscreenControl'],
         zoomRange: [10,15]
       });
 
-      var myPlacemark = new ymaps.Placemark([{{ info.latitude }}, {{ info.longitude }}], {
+      var myPlacemark = new ymaps.Placemark([{{ request.session.salon.latitude }}, {{ request.session.salon.longitude }}], {
           hintContent: 'Содержимое всплывающей подсказки',
           balloonContent: 'Содержимое балуна'
       });

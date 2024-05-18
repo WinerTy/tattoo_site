@@ -5,7 +5,6 @@
 {% include 'components/header.html' with salons=salons %}
 {%endblock%}
 {%block content%}
-<script src="{% static 'js/phone.mask.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <div class="slider">
         {% include 'components/slider.html' with slides=slides %}
@@ -21,7 +20,7 @@
     </div>
     
     <div class="note-form">
-        {% include 'components/form.html' with form=appointment_form %}
+        {% include 'components/form.html' with form=appointment_form link='appointment' title='Записаться на сеанс' %}
     </div>
 {%endblock%}
 {%block footer%}

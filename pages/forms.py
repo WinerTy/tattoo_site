@@ -1,7 +1,5 @@
 from django import forms
 from database.models import Master
-from site_setting.models import Salon
-from icecream import ic
 
 
 class AppointmentForm(forms.Form):

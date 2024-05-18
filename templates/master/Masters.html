@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{%block header%}
+{% include 'components/header.html' with salons=salons%}
+{%endblock%}
+{%block content%}
+{% include 'home/masters.block.html' with masters=masters title='Мастера' %}
+<div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; первая</a>
+        <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+      {% endif %}
+
+      <span class="current">
+        Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">следующая</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">последняя &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+  <style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+</style>
+{%endblock%}
+{%block footer%}
+{% include 'components/footer.html' with info=info %}
+{%endblock%}
+

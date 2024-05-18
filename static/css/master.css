@@ -1,28 +1,8 @@
-.photo img {
-    width: 250px;
-    height: 250px;
-    object-fit: cover;
-    margin: 0 auto;
-}
-
-.master-photo img {
-    width: 500px;
-    height: 500px;
-    object-fit: cover;
-}
-.social, .social-card, .social-title {
-    display: flex;
-}
-.social {
-    flex-direction: column;
-}
-
-.social-title {
+.row {
+    width: 100%;
+    justify-content: center;
     align-items: center;
-    margin-left: 10px;
 }
-.icon img {
-    width: 75px;
-    height: 75px;
-    object-fit: cover;
+.col-lg-4 {
+    width: 20% !important;
 }

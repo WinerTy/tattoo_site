@@ -1,14 +1,12 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/form.css' %}">
+<script src="{% static 'js/phone.mask.js' %}"></script>
 <div class="note-title">
-    <h1>Записаться на сеанс</h1>
+    <h1>{{title}}</h1>
 </div>
-<form method="post" action="{% url 'appointment' %}">
+<form method="post" action="{% url link %}">
     {% csrf_token %}
     {{ form.as_p }}
-    <div class="er">
-        {{ form.errors }}
-    </div>
     <div class="confirm">
         <button type="submit" class="btn btn-primary">Записаться</button>
     </div>

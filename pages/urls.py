@@ -5,6 +5,7 @@ urlpatterns = [
     path("", main, name="home"),
     path("ourworks/", WokrView.as_view(), name="ourworks"),
     path("about/", about, name="about"),
+    path("masters/", MastersView.as_view(), name="masters"),
     path("master/<int:pk>/", MasterInfo.as_view(), name="master-info"),
     path("about/<int:pk>", AboutInfo.as_view(), name="about-info"),
     path('select_salon/', select_salon, name='select_salon'),

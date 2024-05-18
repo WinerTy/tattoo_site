@@ -1,4 +1,12 @@
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/master.css' %}">
+{% if title %}
+    <h1>{{ title }}</h1>
+{% else %}
 <h1>Наши лучшие мастера</h1>
+{% endif %}
+    
 {% if masters %}
 <div class="row">
     {% for master in masters %}

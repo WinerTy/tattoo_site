@@ -31,23 +31,20 @@ def main(request):
     data['slides'] = slides
     data["abouts"] = abouts
     data["info"] = info
-    data['appointment_form'] = AppointmentForm(salon=request.session.get('salon'))
+    data['appointment_form'] = AppointmentForm(salon_pk=request.session.get('salon').get('pk'))
     return render(request, "main.html", data)
 
 
 def CreateAppointment(request):
     if request.method == 'POST':
-        form = AppointmentForm(request.POST)
+        form = AppointmentForm(request.POST, salon_pk=request.session.get('salon').get('pk'))
         if form.is_valid():
-            
-            client_email = form.cleaned_data['client_email']
-            client_phone = form.cleaned_data['client_phone']
-            master = form.cleaned_data['master']
-            Note.objects.create(
-                client_email=client_email,
-                client_phone=client_phone,
-                master=master
+            appointment = Note.objects.create(
+                client_email=form.cleaned_data['client_email'],
+                client_phone=form.cleaned_data['client_phone'],
+                master=form.cleaned_data['master'],
             )
+            appointment.save()
             request.session['message'] = 'Запись успешно создана!'
             return redirect('home')
         else:

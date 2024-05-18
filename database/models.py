@@ -64,6 +64,7 @@ class Note(models.Model):
     master = models.ForeignKey(Master, on_delete=models.CASCADE)
     client_email = models.EmailField()
     client_phone = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Запись"

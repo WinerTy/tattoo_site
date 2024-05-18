@@ -1,6 +1,8 @@
 from django import forms
 from database.models import Master
+from site_setting.models import Salon
 from icecream import ic
+
 
 class AppointmentForm(forms.Form):
     client_email = forms.EmailField(
@@ -16,14 +18,17 @@ class AppointmentForm(forms.Form):
             attrs={'class': 'form-control', 'placeholder': 'Телефон'}
         )
     )
-    master = forms.ChoiceField(label='Мастер', choices=[], widget=forms.Select(attrs={'class': 'form-control'}))
+    master = forms.ModelChoiceField(
+        queryset=Master.objects.none(),
+        label='Мастер',
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
 
     def __init__(self, *args, **kwargs):
-        salon = kwargs.pop('salon', None)
+        salon_pk = kwargs.pop('salon_pk', None)
         super().__init__(*args, **kwargs)
-        if salon:
-            masters = Master.objects.filter(salon__pk=salon['pk'], is_active=True).order_by('?')
-            for test in masters:
-                ic(test.pk)
-            choices = [(master.pk, master.name) for master in masters]
-            self.fields['master'].choices = choices
+        if salon_pk:
+            self.fields['master'].queryset = Master.objects.filter(
+                salon__pk=salon_pk,
+                is_active=True
+            )

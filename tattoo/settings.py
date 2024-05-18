@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "pages",
     "database",
     "debug_toolbar",
+    "image_uploader_widget",
 ]
 
 MIDDLEWARE = [

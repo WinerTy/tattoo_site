@@ -1,8 +1,10 @@
 from django.views.generic import ListView, DetailView
 from django.shortcuts import render, redirect
-from database.models import Works, Master, SocialAccount, Slider
+from database.models import Works, Master, SocialAccount, Slider, Note
 from site_setting.models import AboutBlock, Contact, Salon
 import random
+from .forms import AppointmentForm
+from icecream import ic
 
 
 def main(request):
@@ -10,6 +12,8 @@ def main(request):
     salons = Salon.objects.all()
     data['salons'] = salons
     salon = request.session.get('salon')
+    message = request.session.pop('message', None)
+    data['message'] = message
     if salon is None:
         new_salon = random.choice(salons)
         request.session['salon'] = {"name": new_salon.name,
@@ -27,9 +31,30 @@ def main(request):
     data['slides'] = slides
     data["abouts"] = abouts
     data["info"] = info
-
+    data['appointment_form'] = AppointmentForm(salon=request.session.get('salon'))
     return render(request, "main.html", data)
 
+
+def CreateAppointment(request):
+    if request.method == 'POST':
+        form = AppointmentForm(request.POST)
+        if form.is_valid():
+            
+            client_email = form.cleaned_data['client_email']
+            client_phone = form.cleaned_data['client_phone']
+            master = form.cleaned_data['master']
+            Note.objects.create(
+                client_email=client_email,
+                client_phone=client_phone,
+                master=master
+            )
+            request.session['message'] = 'Запись успешно создана!'
+            return redirect('home')
+        else:
+            ic(form.errors)
+            request.session['message'] = 'Произошла ошибка при оформлении записи!'
+            return redirect('home')
+    return redirect('home')
 
 def clear(request):
     request.session.flush()

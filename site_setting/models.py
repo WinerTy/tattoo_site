@@ -32,9 +32,6 @@ class AboutBlock(models.Model):
                                          help_text="Текст отоброжаемый на главной странице")
     description = models.TextField(verbose_name="Подробное описание",
                                    help_text="текст используемый на подробной странице")
-    icon = models.ImageField(upload_to="Site/AboutIcons/",
-                             verbose_name="Иконка",
-                             help_text="Иконка на главной странице")
 
     class Meta:
         verbose_name = "О нас"

@@ -61,6 +61,7 @@ class SocialAccount(models.Model):
 
 
 class Note(models.Model):
+    master = models.ForeignKey(Master, on_delete=models.CASCADE)
     client_email = models.EmailField()
     client_phone = models.CharField(max_length=20)
 

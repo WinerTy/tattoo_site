@@ -7,11 +7,13 @@
     <img class="card-img-top" src="{{about.image.url}}" alt="Card image">
     <div class="card-body">
       <h5 class="card-title">{{about.title}}</h5>
-      <p class="card-text">{{about.short_description}}</p>
+      <p class="card-text">{{about.short_description|linebreaksbr}}</p>
       <p class="card-text"><small class="text-muted"><a href="{% url 'about-info' about.pk %}">Узнать больше</a></small></p>
     </div>
   </div>
   {%empty%}
-  <div class="card"></div>
+  <div class="card">
+    <h2>В нашем салоне пока нет информации</h2>
+  </div>
   {%endfor%}
 </div>

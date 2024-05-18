@@ -1,0 +1,15 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/form.css' %}">
+<div class="note-title">
+    <h1>Записаться на сеанс</h1>
+</div>
+<form method="post" action="{% url 'appointment' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="er">
+        {{ form.errors }}
+    </div>
+    <div class="confirm">
+        <button type="submit" class="btn btn-primary">Записаться</button>
+    </div>
+</form>

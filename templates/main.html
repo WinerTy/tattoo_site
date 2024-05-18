@@ -1,12 +1,17 @@
 {% extends 'base.html'%}
 {% load static %}
+{% load del %}
 {%block header%}
 {% include 'components/header.html' with salons=salons %}
 {%endblock%}
 {%block content%}
+<script src="{% static 'js/phone.mask.js' %}"></script>
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <div class="slider">
         {% include 'components/slider.html' with slides=slides %}
+    </div>
+    <div class="notify">
+        {% include 'components/notify.html' with message=message %}
     </div>
     <div class="container-about">
         {% include 'home/about.block.html' with abouts=abouts %}
@@ -15,6 +20,9 @@
         {% include 'home/masters.block.html' with masters=masters %}
     </div>
     
+    <div class="note-form">
+        {% include 'components/form.html' with form=appointment_form %}
+    </div>
 {%endblock%}
 {%block footer%}
 {% include 'components/footer.html' with info=info %}

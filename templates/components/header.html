@@ -17,9 +17,6 @@
         <div class="salon-text">
           <p>Адресс салона: <strong>{{request.session.salon.address}}</strong></p>
         </div>
-        <div class="map">
-          <div id="map"></div>
-        </div>
         <form method="post" action="{% url 'select_salon' %}">
           {% csrf_token %}
           <select class="form-control" name="salon_pk" onchange="this.form.submit()">
@@ -30,7 +27,7 @@
                   </option>
               {% endfor %}
           </select>
-      </form>
+      </form> 
       </div>
     </div>
 
@@ -44,34 +41,3 @@
     </ul>
 </header>
 <script src="{% static 'js/modal.js' %}"></script>
-
-
-<script>
-  ymaps.ready(init);
-  function init() {
-      var myMap = new ymaps.Map("map", {
-        center: [{{ request.session.salon.latitude }}, {{ request.session.salon.longitude }}],
-        zoom: 15,
-        controls: [ 'fullscreenControl'],
-        zoomRange: [10,15]
-      });
-
-      var myPlacemark = new ymaps.Placemark([{{ request.session.salon.latitude }}, {{ request.session.salon.longitude }}], {
-          hintContent: 'Содержимое всплывающей подсказки',
-          balloonContent: 'Содержимое балуна'
-      });
-      
-      myMap.geoObjects.add(myPlacemark);
-  }
-</script>
-
-<style>
-  .map {
-    display: flex;
-    justify-content: center;
-  }
-  #map {
-    width: 600px;
-    height: 400px;
-  }
-</style>

@@ -13,12 +13,13 @@
         {% include 'components/notify.html' with message=message %}
     </div>
     <div class="container-about">
+        <h1>Почему именно мы</h1>
         {% include 'home/about.block.html' with abouts=abouts %}
     </div>
     <div class="container-masters">
+        <h1>Наши лучшие мастера</h1>
         {% include 'home/masters.block.html' with masters=masters %}
     </div>
-    
     <div class="note-form">
         {% include 'components/form.html' with form=appointment_form link='appointment' title='Записаться на сеанс' %}
     </div>

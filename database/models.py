@@ -29,9 +29,8 @@ class Works(models.Model):
 
 
 class Master(models.Model):
-    salon = models.ForeignKey(Salon, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to="MastersPhoto/",
-                              verbose_name="Фотография")
+    salon = models.ForeignKey(Salon, on_delete=models.CASCADE, verbose_name="Салон")
+    photo = models.ImageField(upload_to="MastersPhoto/", verbose_name="Фотография")
     name = models.CharField(max_length=20, verbose_name="Имя")
     description = models.TextField(blank=True, verbose_name="Описание")
     works = models.ManyToManyField(Works, blank=True, verbose_name="Работы мастера")
@@ -48,7 +47,12 @@ class Master(models.Model):
 
 
 class SocialAccount(models.Model):
-    master = models.ForeignKey(Master, verbose_name="Мастер", on_delete=models.CASCADE, related_name='social_account')
+    master = models.ForeignKey(
+        Master,
+        verbose_name="Мастер",
+        on_delete=models.CASCADE,
+        related_name="social_account",
+    )
     icon = models.ImageField(upload_to="MastersSocial/", verbose_name="Иконка")
     link = models.CharField(max_length=150, verbose_name="Ссылка")
 

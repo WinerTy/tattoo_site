@@ -4,14 +4,8 @@
     width: 100%;
 }
 
-.title h1 {
-    font-family: 'NEXT-ART';
-    font-weight: 600;
-}
 .name h3 {
     text-align: center;
-    font-family: 'Onest';
-    font-weight: 500;
     text-decoration: none;
     color: black;
 }
@@ -36,10 +30,7 @@
     display: flex;
     justify-content: center;
 }
-.container-masters h1, .container-about h1 {
-    font-family: 'NEXT-ART';
-    font-weight: 600;
-}
+
 .container-about {
     flex-direction: column;
 }

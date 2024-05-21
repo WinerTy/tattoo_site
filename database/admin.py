@@ -24,15 +24,34 @@ class SliderAdmin(admin.ModelAdmin):
                 image.url
             )
         )
+
     show_image.short_description = "Изображение"
+
+
 class SocialAccountInline(admin.TabularInline):
     model = SocialAccount
+    formfield_overrides = {
+        models.ImageField: {"widget": ImageUploaderWidget},
+    }
+
+    class Media:
+        css = {"all": ("css/admin/ImageUploader.css",)}
 
 
 class MasterAdmin(admin.ModelAdmin):
     list_display = ["id", "name"]
-    list_filter = ["salon",]
-    inlines = [SocialAccountInline,]
+    list_filter = [
+        "salon",
+    ]
+    inlines = [
+        SocialAccountInline,
+    ]
+    formfield_overrides = {
+        models.ImageField: {"widget": ImageUploaderWidget},
+    }
+
+    class Media:
+        css = {"all": ("css/admin/ImageUploader.css",)}
 
 
 admin.site.register(Works)

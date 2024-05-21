@@ -10,7 +10,7 @@ class ContactInline(admin.TabularInline):
     extra = 1
     max_num = 1
     verbose_name = "Контактная информация"
-
+    verbose_name_plural = "Контактные данные"
     def has_delete_permission(self, request, obj=None):
         return False
 

@@ -4,7 +4,7 @@ from django.db import models
 
 from image_uploader_widget.widgets import ImageUploaderWidget
 
-from .models import Works, Master, Note, SocialAccount, Slider
+from .models import TattooType, Works, Master, Note, SocialAccount, Slider, Session
 
 
 class SliderAdmin(admin.ModelAdmin):
@@ -28,6 +28,10 @@ class SliderAdmin(admin.ModelAdmin):
     show_image.short_description = "Изображение"
 
 
+class SessionInline(admin.TabularInline):
+    model = Session
+
+
 class SocialAccountInline(admin.TabularInline):
     model = SocialAccount
     formfield_overrides = {
@@ -43,9 +47,7 @@ class MasterAdmin(admin.ModelAdmin):
     list_filter = [
         "salon",
     ]
-    inlines = [
-        SocialAccountInline,
-    ]
+    inlines = [SocialAccountInline, SessionInline]
     formfield_overrides = {
         models.ImageField: {"widget": ImageUploaderWidget},
     }
@@ -58,3 +60,4 @@ admin.site.register(Works)
 admin.site.register(Master, MasterAdmin)
 admin.site.register(Note)
 admin.site.register(Slider, SliderAdmin)
+admin.site.register(TattooType)

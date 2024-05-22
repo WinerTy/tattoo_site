@@ -1,0 +1,16 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/master/master-social.css' %}">
+<div class="socials">
+    <div class="block-title">
+        <h1>Я есть в социальных сетях</h1>
+    </div>
+    <div class="socials-icons">
+        {% for social in socials %}
+        <div class="icon">
+            <a href="{{ social.link }}" target="_blank" rel="noopener noreferrer">
+                <img src="{{ social.icon.icon.url }}" alt="">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>

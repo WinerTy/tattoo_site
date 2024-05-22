@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Contact, AboutBlock, Salon
+from .models import Contact, AboutBlock, Salon, SocialAccountIcon
 
 from django.db import models
 from image_uploader_widget.widgets import ImageUploaderWidget
@@ -11,12 +11,15 @@ class ContactInline(admin.TabularInline):
     max_num = 1
     verbose_name = "Контактная информация"
     verbose_name_plural = "Контактные данные"
+
     def has_delete_permission(self, request, obj=None):
         return False
 
 
 class SalonAdmin(admin.ModelAdmin):
-    inlines = [ContactInline,]
+    inlines = [
+        ContactInline,
+    ]
     list_display = ["id", "name", "address", "longitude", "latitude"]
     list_display_links = ["id", "name"]
     search_fields = ["name", "address", "longitude", "latitude", "id"]
@@ -34,5 +37,7 @@ class AboutAdmin(admin.ModelAdmin):
     class Media:
         css = {"all": ("css/admin/ImageUploader.css",)}
 
+
 admin.site.register(Salon, SalonAdmin)
 admin.site.register(AboutBlock, AboutAdmin)
+admin.site.register(SocialAccountIcon)

@@ -50,3 +50,14 @@ class AboutBlock(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class SocialAccountIcon(models.Model):
+    icon = models.ImageField(upload_to="Site/SocialIcons/", verbose_name="Иконка")
+
+    class Meta:
+        verbose_name = "Социальная сеть иконка"
+        verbose_name_plural = "Социальные сети иконки"
+
+    def __str__(self):
+        return self.icon.name

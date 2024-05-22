@@ -8,28 +8,12 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/masterinfo.css' %}">
 <title>Мастер {{ master.name }}</title>
-<div class="master">
-    <div class="master-photo">
-        <img src="{{ master.photo.url }}" alt="">
-    </div>
-    <div class="about-master">
-        {{ master.description }}
-    </div>
-</div>
-<div class="social">
-    {% if social_accounts %}
-{% for social in social_accounts %}
-    <div class="social-card">
-        <div class="icon"><img src="{{ social.icon.url }}" alt=""></div>
-        <div class="social-title">{{ social.link }}</div>
-    </div>
-    {% endfor %}
-{% else %}
-<div class="social-info">
-    <h3>Мастер не указал свои социальные сети</h3>
-</div>
-{% endif %}
-</div>
+
+{% include 'components/master/master-info.html' with master=master times=working_time %}
+
+
+{% include 'components/master/master-social.html' with socials=social_accounts %}
+
 <div class="works">
     <h1>Работы мастера</h1>
     {% include 'components/master/masters-works.html' with works=master.works.all %}    

@@ -1,0 +1,57 @@
+.master {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.master-photo {
+    max-width: 600px;
+    max-height: 600px;
+    display: flex;
+    object-fit: cover;
+    img {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.master-info {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    h1 {
+        text-align: center;
+    }
+    .tattoo-type {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        gap: 30px;
+        span:hover {
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+            color: #fff;
+            background-color: black;
+            border-radius: 15%;
+        }
+    }
+}
+
+.types {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.times {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}

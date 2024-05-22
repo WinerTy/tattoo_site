@@ -5,6 +5,8 @@ from site_setting.models import AboutBlock
 from pages.forms import AppointmentForm, SelectSalonForm
 from pages.misc.page_info import get_contact_info, get_random_salon
 
+from icecream import ic
+
 
 def main(request):
     data = {}

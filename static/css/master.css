@@ -1,6 +1,6 @@
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Определяем, что каждая колонка будет иметь минимальную ширину 200px и максимальную ширину 1fr */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
     justify-content: center;
     align-items: center;
@@ -12,10 +12,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 100%; /* Устанавливаем максимальную ширину карточки */
+    max-width: 100%;
 }
 
-/* Дополнительные стили для карточек */
+
 .master-card img {
     width: 140px;
     height: 140px;

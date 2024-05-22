@@ -1,0 +1,11 @@
+.icon {
+    img {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+.socials-icons {
+    display: flex;
+    gap: 30px;
+}

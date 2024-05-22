@@ -14,24 +14,14 @@
           <span class="close">&times;</span>
         </div>
         <h3>Вы можете изменить салон при помощи выпадающего списка</h3>
-        <div class="salon-text">
-          <p>Адресс салона: <strong>{{request.session.salon.address}}</strong></p>
-        </div>
         <form method="post" action="{% url 'select_salon' %}">
           {% csrf_token %}
-          <select class="form-control" name="salon_pk" onchange="this.form.submit()">
-              <option >Наши салоны</option>
-              {% for salon in salons %}
-                  <option value="{{ salon.pk }}" {% if salon.pk == request.session.salon.pk %}selected{% endif %}>
-                      {{ salon.name }}
-                  </option>
-              {% endfor %}
-          </select>
+          {{form.as_div}}
+          <button type="submit" class="btn btn-primary">Подтвердить</button>
       </form> 
       </div>
     </div>
 
-    
     <ul class="nav nav-pills">
       <li class="nav-item"><button class="nav-link" id="openModalBtn">{% if request.session.salon.name %}{{request.session.salon.name}}{% else %}Выберите салон{% endif %}</button></li>
       <li class="nav-item"><a href="{% url 'home' %}" class="nav-link" aria-current="page">Главная</a></li>

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {%block header%}
-{% include 'components/header.html' with salons=salons%}
+{% include 'components/global/header.html' with salons=salons%}
 {%endblock%}
 {%block content%}
 <h1>dsadasdsa</h1>
@@ -31,6 +31,6 @@
 </style>
 {%endblock%}
 {%block footer%}
-{% include 'components/footer.html' with info=info %}
+{% include 'components/global/footer.html' with info=info %}
 {%endblock%}
 

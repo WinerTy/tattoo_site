@@ -1,0 +1,18 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/master/master-works.css' %}">
+<div class="master-works">
+{% for work in works %}
+<div class="work-card">
+    <div class="photo">
+        <img src="{{ work.photo.url }}" alt="">
+        <div class="work-info">
+            <p>{{ work.name }}</p>
+            <p>{{ work.type }}</p>
+        </div>
+    </div>
+</div>
+{% empty %}
+<p>У мастера пока нет работ</p>
+{% endfor %}
+</div>
+<script src="{% static 'js/masters-works.js' %}"></script>

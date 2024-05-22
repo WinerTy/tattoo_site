@@ -6,8 +6,7 @@ class Salon(models.Model):
     address = models.CharField(max_length=255, verbose_name="Адрес")
     longitude = models.CharField(max_length=100, verbose_name="Долгота")
     latitude = models.CharField(max_length=100, verbose_name="Широта")
-    created_at = models.DateTimeField(auto_now_add=True,
-                                      verbose_name="Дата создания")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
 
     class Meta:
         verbose_name = "Салон"
@@ -15,6 +14,16 @@ class Salon(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_session_data(self):
+        data = {
+            "address": self.address,
+            "latitude": self.latitude,
+            "longitude": self.longitude,
+            "name": self.name,
+            "pk": self.pk,
+        }
+        return data
 
 
 class Contact(models.Model):
@@ -24,14 +33,16 @@ class Contact(models.Model):
 
 
 class AboutBlock(models.Model):
-    image = models.ImageField(upload_to="Site/AboutImages/",
-                              verbose_name="Картинка")
-    title = models.CharField(max_length=50,
-                             verbose_name="Заголовок")
-    short_description = models.TextField(verbose_name="Краткое описание",
-                                         help_text="Текст отоброжаемый на главной странице")
-    description = models.TextField(verbose_name="Подробное описание",
-                                   help_text="текст используемый на подробной странице")
+    image = models.ImageField(upload_to="Site/AboutImages/", verbose_name="Картинка")
+    title = models.CharField(max_length=50, verbose_name="Заголовок")
+    short_description = models.TextField(
+        verbose_name="Краткое описание",
+        help_text="Текст отоброжаемый на главной странице",
+    )
+    description = models.TextField(
+        verbose_name="Подробное описание",
+        help_text="текст используемый на подробной странице",
+    )
 
     class Meta:
         verbose_name = "О нас"

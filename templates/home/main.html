@@ -2,7 +2,7 @@
 {% load static %}
 {% load del %}
 {%block header%}
-{% include 'components/header.html' with salons=salons %}
+{% include 'components/global/header.html' with form=salon_form %}
 {%endblock%}
 {%block content%}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
@@ -25,5 +25,5 @@
     </div>
 {%endblock%}
 {%block footer%}
-{% include 'components/footer.html' with info=info %}
+{% include 'components/global/footer.html' with info=info %}
 {%endblock%}

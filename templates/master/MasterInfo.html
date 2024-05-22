@@ -1,5 +1,11 @@
+{% extends 'base.html' %}
 {% load static %}
-{% include "components/header.html" %}
+{% block header %}
+    {% include "components/global/header.html" with form=salon_form %}
+{% endblock header %}
+
+
+{% block content %}
 <link rel="stylesheet" href="{% static 'css/masterinfo.css' %}">
 <title>Мастер {{ master.name }}</title>
 <div class="master">
@@ -24,18 +30,17 @@
 </div>
 {% endif %}
 </div>
-
-<div class="master-works">
+<div class="works">
     <h1>Работы мастера</h1>
-    {% for work in master.works.all %}
-    <div class="work-card">
-        <div class="photo">
-            <img src="{{ work.photo.url }}" alt="">
-        </div>
-    </div>
-{% empty %}
-    <p>У мастера пока нет работ</p>
-{% endfor %}
+    {% include 'components/master/masters-works.html' with works=master.works.all %}    
 </div>
-{% include "components/footer.html" %}
+
+{% endblock content %}
+    
+{% block footer %}
+    {% include "components/global/footer.html" %}
+{% endblock footer %}
+    
+
+
 

@@ -1,8 +1,42 @@
-.row {
-    width: 100%;
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Определяем, что каждая колонка будет иметь минимальную ширину 200px и максимальную ширину 1fr */
+    gap: 20px;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
+    max-width: 1000px;
 }
-.col-lg-4 {
-    width: 20% !important;
+
+.master-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%; /* Устанавливаем максимальную ширину карточки */
+}
+
+/* Дополнительные стили для карточек */
+.master-card img {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+}
+
+.master-card h2 {
+    font-weight: normal;
+}
+
+.master-card p {
+    text-align: center;
+}
+
+.master-card a {
+    color: white;
+    background-color: #007bff;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.master-card a:hover {
+    background-color: #0056b3;
 }

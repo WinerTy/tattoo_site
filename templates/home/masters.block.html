@@ -1,20 +1,19 @@
-
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/master.css' %}">
-{% if masters %}
-<div class="row">
-    {% for master in masters %}
-    <div class="col-lg-4">
-        <img src="{{master.photo.url}}" alt="" class="bd-placeholder-img rounded-circle" width="140" height="140">
-        <h2 class="fw-normal">{{ master.name }}</h2>
-        <span> {{ master.tattoo_type }}</span>
-        <p>{{ master.description }}</p>
-        <p><a class="btn btn-primary" href="{% url 'master-info' master.pk %}">Подробнее &raquo;</a></p>
-    </div>
-    {% endfor %}
+<div class="grid-container">
+    {% if masters %}
+        {% for master in masters %}
+            <div class="master-card">
+                <img src="{{master.photo.url}}" alt="" class="bd-placeholder-img rounded-circle" width="140" height="140">
+                <h2 class="fw-normal">{{ master.name }}</h2>
+                <span> {{ master.tattoo_type }}</span>
+                <p>{{ master.description }}</p>
+                <p><a class="btn btn-primary" href="{% url 'master-info' master.pk %}">Подробнее &raquo;</a></p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty">
+            <h1>В нашем салоне пока нет мастеров</h1>
+        </div>
+    {% endif %}
 </div>
-{%else%}
-<div class="empty">
-    <h1>В нашем салоне пока нет мастеров</h1>
-</div>
-{%endif%}

@@ -14,10 +14,10 @@
           <span class="close">&times;</span>
         </div>
         <h3>Вы можете изменить салон при помощи выпадающего списка</h3>
-        <form method="post" action="{% url 'select_salon' %}">
+        <form class="modal-form" method="post" action="{% url 'select_salon' %}">
           {% csrf_token %}
           {{salon_form.as_div}}
-          <button type="submit" class="btn btn-primary">Подтвердить</button>
+          <button type="submit" class="button">Подтвердить</button>
       </form> 
       </div>
     </div>

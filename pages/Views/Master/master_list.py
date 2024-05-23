@@ -3,6 +3,7 @@ from django.views.generic import ListView
 from database.models import Master, Salon
 
 from pages.misc.page_info import get_contact_info
+from pages.forms import SelectSalonForm
 
 
 class MastersView(ListView):
@@ -13,8 +14,7 @@ class MastersView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["salons"] = Salon.objects.all()
-        context["info"] = get_contact_info(self.request.session.get("salon"))
+        context["salon_form"] = SelectSalonForm()
         return context
 
     def get_queryset(self):

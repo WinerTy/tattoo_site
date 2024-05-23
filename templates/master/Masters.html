@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
 {%block header%}
-{% include 'components/global/header.html' with salons=salons%}
+{% include 'components/global/header.html' with form=salon_form%}
 {%endblock%}
 {%block content%}
-<h1>dsadasdsa</h1>
+<h1>Наши мастера</h1>
 {% include 'home/masters.block.html' with masters=masters %}
-{% include 'components/pagination.html' %}
+{% include 'components/global/pagination.html' %}
 {%endblock%}
 {%block footer%}
 {% include 'components/global/footer.html' with info=info %}

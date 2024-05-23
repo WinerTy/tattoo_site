@@ -16,7 +16,7 @@
         <h3>Вы можете изменить салон при помощи выпадающего списка</h3>
         <form method="post" action="{% url 'select_salon' %}">
           {% csrf_token %}
-          {{form.as_div}}
+          {{salon_form.as_div}}
           <button type="submit" class="btn btn-primary">Подтвердить</button>
       </form> 
       </div>

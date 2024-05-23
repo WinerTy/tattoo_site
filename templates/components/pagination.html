@@ -1,0 +1,13 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/global/pagination.css' %}">
+{% if page_obj.paginator.num_pages > 1 %}
+<ul class="pagination">
+    <li><a href="?page={{ page_obj.paginator.page_range.0 }}">&laquo;</a></li>
+    
+    {% for page in page_obj.paginator.page_range %}
+      <li><a href="?page={{ page }}">{{ page }}</a></li>
+    {% endfor %}
+    <li><a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a></li>
+  </ul>
+{% endif %}
+<script src="{% static 'js/pagination.js' %}"></script>

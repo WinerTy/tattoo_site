@@ -32,3 +32,6 @@ h3 {
   font-family: 'Onest';
   font-weight: 500;
 }
+.btn-primary {
+  background-color: #c54809 !important;
+}

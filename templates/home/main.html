@@ -1,14 +1,7 @@
 {% extends 'base.html'%}
 {% load static %}
-{% load del %}
-{%block header%}
-{% include 'components/global/header.html' %}
-{%endblock%}
 {%block content%}
-<link
-rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <div class="slider">
@@ -25,10 +18,5 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
         <h1>Наши лучшие мастера</h1>
         {% include 'components/master/slider.html' with slides=masters %}
     </div>
-    <div class="note-form">
         {% include 'components/form.html' with form=appointment_form link='appointment' title='Записаться на сеанс' %}
-    </div>
-{%endblock%}
-{%block footer%}
-{% include 'components/global/footer.html' with info=info %}
 {%endblock%}

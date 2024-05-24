@@ -1,3 +1,4 @@
+from os import link
 from django.db import models
 
 
@@ -24,6 +25,30 @@ class Salon(models.Model):
             "pk": self.pk,
         }
         return data
+
+
+class SalonSocial(models.Model):
+    SOCIAL = (
+        ("vk", "VK"),
+        ("telegram", "Telegram"),
+        ("instagram", "Instagram"),
+        ("facebook", "Facebook"),
+        ("youtube", "Youtube"),
+        ("twitter", "Twitter"),
+        ("whatsapp", "Whatsapp"),
+    )
+    salon = models.ForeignKey(Salon, on_delete=models.CASCADE)
+    social = models.CharField(
+        max_length=20, choices=SOCIAL, verbose_name="Социальная сеть"
+    )
+    link = models.URLField(verbose_name="Ссылка")
+
+    class Meta:
+        verbose_name = "Социальная сеть"
+        verbose_name_plural = "Социальные сети"
+
+    def __str__(self):
+        return self.social
 
 
 class Contact(models.Model):

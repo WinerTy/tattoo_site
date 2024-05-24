@@ -8,14 +8,17 @@ class AppointmentForm(forms.Form):
     client_email = forms.EmailField(
         label="",
         widget=forms.EmailInput(
-            attrs={"class": "form-control", "placeholder": "Email"}
+            attrs={"class": "form-control", "placeholder": "example@mail.ru"}
         ),
     )
     client_phone = forms.CharField(
         label="",
         max_length=20,
         widget=forms.TextInput(
-            attrs={"class": "form-control", "placeholder": "Телефон"}
+            attrs={
+                "class": "form-control",
+                "placeholder": "+7 (123) 456-78-90",
+            }
         ),
     )
     master = forms.ModelChoiceField(

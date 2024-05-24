@@ -1,5 +1,5 @@
 import random
-from site_setting.models import Contact, Salon
+from site_setting.models import Contact, Salon, SalonSocial
 
 
 def get_random_salon():
@@ -8,4 +8,8 @@ def get_random_salon():
 
 
 def get_contact_info(salon):
-    return Contact.objects.filter(salon__pk=salon['pk']).first()
+    data = {
+        "contact": Contact.objects.filter(salon__pk=salon["pk"]).first(),
+        "socials": SalonSocial.objects.filter(salon__pk=salon["pk"]),
+    }
+    return data

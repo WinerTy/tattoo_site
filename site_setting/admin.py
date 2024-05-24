@@ -1,8 +1,16 @@
 from django.contrib import admin
-from .models import Contact, AboutBlock, Salon, SocialAccountIcon
+from .models import Contact, AboutBlock, Salon, SocialAccountIcon, SalonSocial
 
 from django.db import models
 from image_uploader_widget.widgets import ImageUploaderWidget
+
+
+class SalonSocialInline(admin.TabularInline):
+    model = SalonSocial
+    extra = 1
+    max_num = 4
+    verbose_name = "Социальная сеть"
+    verbose_name_plural = "Социальные сети"
 
 
 class ContactInline(admin.TabularInline):
@@ -17,9 +25,7 @@ class ContactInline(admin.TabularInline):
 
 
 class SalonAdmin(admin.ModelAdmin):
-    inlines = [
-        ContactInline,
-    ]
+    inlines = [ContactInline, SalonSocialInline]
     list_display = ["id", "name", "address", "longitude", "latitude"]
     list_display_links = ["id", "name"]
     search_fields = ["name", "address", "longitude", "latitude", "id"]

@@ -6,6 +6,7 @@ html, body {
   width: 100%;
   box-sizing: border-box;
   padding-top: 0 !important;
+  background-color: black !important;
 }
 
 
@@ -22,8 +23,9 @@ a {
 
 
 h1 {
-  font-family: 'NEXT-ART';
+  font-family: 'NEXT-ART', sans-serif;
   font-weight: 600;
+  color: #fff;
 }
 
 h3 {

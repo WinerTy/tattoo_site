@@ -17,7 +17,7 @@ def main(request):
         new_salon = get_random_salon()
         request.session["salon"] = new_salon.get_session_data()
         salon = request.session.get("salon")
-    masters = Master.objects.filter(is_active=True, salon__pk=salon.get("pk"))[:3]
+    masters = Master.objects.filter(is_active=True, salon__pk=salon.get("pk"))
     slides = Slider.objects.filter(is_active=True)
     abouts = AboutBlock.objects.all()[:3]
     info = get_contact_info(salon)

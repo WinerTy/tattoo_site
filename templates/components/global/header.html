@@ -1,20 +1,7 @@
 {% load static %}
-<!-- <div id="modal" class="modal">
-  <div class="modal-content">
-    <div class="control-items">
-      <span class="close">&times;</span>
-    </div>
-    <h3>Вы можете изменить салон при помощи выпадающего списка</h3>
-    <form class="modal-form" method="post" action="{% url 'select_salon' %}">
-      {% csrf_token %}
-      {{salon_form.as_div}}
-      <button type="submit" class="button">Подтвердить</button>
-  </form> 
-  </div>
-</div>
-<script src="{% static 'js/modal.js' %}"></script> -->
 <header>
   <link rel="stylesheet" href="{% static 'css/global/header.css' %}">
+  <link rel="stylesheet" href="{% static 'css/modal.css' %}">
   <nav>
     <a href="/"><h1 class="logo">BARAKA</h1></a>
     <ul class="list">
@@ -25,11 +12,21 @@
     </ul>
     <button class="menu" onclick="toggleMenu()">Menu</button>
   </nav>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-title">
+        <h3>Изменить салон</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="choices-new">
+        <form class="modal-form" id="salonForm" method="post" action="{% url 'select_salon' %}">
+          {% csrf_token %}
+          {{salon_form.as_div}}
+        <button type="submit" class="submit-button"><span>Выбрать</span><em id="selectedSalon">Выбранный салон:</em></button>
+        </form> 
+      </div>
+    </div>
+  </div>
+  <script src="{% static 'js/header.js' %}"></script>
+  <script src="{% static 'js/modal.js' %}"></script>
 </header>
-
-<script>
-  function toggleMenu() {
-    var list = document.querySelector('.list');
-    list.classList.toggle('active');
-  }
-</script>

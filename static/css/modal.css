@@ -11,7 +11,7 @@
   }
   
   .modal-content {
-    background-color: #fefefe;
+    background-color: var(--primary-color);
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -40,23 +40,8 @@
   flex-direction: column;
   gap: 30px;
 }
-
-.button {
-width: 240px;
-  height: 45px;
-  border: 1px solid #cc8e6e;
-  text-align: center;
-  display: inline-block;
-  color: #fff;
-  transition: .2s;
-  font-family: 'intro_book';
-  text-transform: uppercase;
-  text-decoration: none;
-  background-color: transparent;
-}
-
-.button:hover {
-  color: #cc8e6e;
-  border: 1px solid #cc8e6e;
-  text-decoration: none;
+.modal-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

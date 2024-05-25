@@ -26,9 +26,6 @@ header {
     color: white;
   }
   a {
-    font-family: "Onest", sans-serif;
-    font-weight: 700;
-    color: #fff;
     text-decoration: none;
     &:hover,
     &:focus {
@@ -65,10 +62,10 @@ header {
     z-index: 100;
     display: block;
     position: absolute;
-    top: 50px;
+    top: 100px;
     left: 0;
     width: 100%;
-    background-color: #fff;
+    background-color: var(--primary-color);
     padding: 10px;
     box-sizing: border-box;
   }
@@ -83,7 +80,7 @@ header {
     padding: 10px;
     font-family: "Onest", sans-serif;
     font-weight: 700;
-    color: #fff;
+    color: var(--secondary-color);
     text-decoration: none;
   }
   

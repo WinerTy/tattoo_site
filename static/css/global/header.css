@@ -10,12 +10,14 @@ header {
     padding: 16px 20px 30px 20px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     color: white;
     font-size: 16px;
     @media (min-width: 640px) {
       padding: 16px 50px 30px 50px;
     }
   }
+
   nav.is-hidden {
     transform: translateY(-100%);
   }

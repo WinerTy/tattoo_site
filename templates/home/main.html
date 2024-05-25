@@ -3,12 +3,8 @@
 {%block content%}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<link rel="stylesheet" href="{% static 'css/home.css' %}">
     <div class="slider">
         {% include 'components/slider.html' with slides=slides %}
-    </div>
-    <div class="notify">
-        {% include 'components/notify.html' with message=message %}
     </div>
     <section class="abouts">
         {% include 'home/about.block.html' with abouts=abouts %}

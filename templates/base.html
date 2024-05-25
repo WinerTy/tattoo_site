@@ -5,12 +5,13 @@
     <link rel="stylesheet" href="{% static 'css/global/variables.css'%}">
     <link rel="stylesheet" href="{% static 'css/global/global.css'%}">
     <link rel="stylesheet" href="{% static 'css/misc/button.css' %}">
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://use.fontawesome.com/20ab91acc4.js"></script>
-    <link href="https://use.fontawesome.com/20ab91acc4.css" media="all" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BARAKA</title>
@@ -19,10 +20,17 @@
     {%block header%}
     {% include 'components/global/header.html' %}
     {%endblock%}
+    
+    {% block notify %}
+        {% include 'components/misc/notify.html' %}
+    {% endblock notify %}
+        
     {%block content%}
     {%endblock%}
+
     {%block footer%}
     {% include 'components/global/footer.html' %}
     {%endblock%}
+
 </body>
 </html>

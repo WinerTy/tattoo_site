@@ -2,6 +2,7 @@ from django.shortcuts import redirect
 
 from database.models import Note
 from pages.forms import AppointmentForm
+from pages.misc.create_message import create_message
 
 
 def create_appointment(request):
@@ -16,9 +17,13 @@ def create_appointment(request):
                 master=form.cleaned_data["master"],
             )
             appointment.save()
-            request.session["message"] = "Запись успешно создана!"
+            request.session["message"] = create_message(
+                "success", "Запись успешно создана!"
+            )
             return redirect("home")
         else:
-            request.session["message"] = "Произошла ошибка при оформлении записи!"
+            request.session["message"] = create_message(
+                "error", "Произошла ошибка при оформлении записи!"
+            )
             return redirect("home")
     return redirect("home")

@@ -1,0 +1,35 @@
+{% load static %}
+{% load del %}
+<link rel="stylesheet" href="{% static 'css/misc/notify.css' %}">
+{% if request.session.message %}
+<div class="notify">
+    <div class="notify-body" id="notify-body">
+        {% if request.session.message.type == 'success' %}
+        <div class="check">
+            <i class="far fa-check-circle color" style="font-size: 1.5em;"></i> &nbsp; &nbsp;
+            <span>{{ request.session.message.text }}</span>
+          </div>
+        {% endif %}
+            
+        {% if message.type == 'danger'  %}
+        <div class="danger">
+            <i class="far fa-times-circle shine" style="font-size: 1.5em;"></i>
+            &nbsp; &nbsp;
+            <span class="text-notify">{{ request.session.message.text }}</span>
+        </div>
+        {% endif %}
+            
+        
+    </div>
+</div>
+{% endif %}
+    
+
+<script>
+    window.onload = function() {
+        setTimeout(function() {
+            document.getElementById('notify-body').style.display = 'none';
+            {% delete_session_variable 'message' %}
+        }, 30000);
+    };
+</script>

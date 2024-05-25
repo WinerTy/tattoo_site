@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "database",
     "debug_toolbar",
     "image_uploader_widget",
+    "fontawesomefree",
 ]
 
 MIDDLEWARE = [

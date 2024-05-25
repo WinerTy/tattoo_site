@@ -5,16 +5,10 @@ from site_setting.models import AboutBlock
 from pages.forms import AppointmentForm, SelectSalonForm
 from pages.misc.page_info import get_contact_info, get_random_salon
 
-from icecream import ic
-import datetime
-
 
 def main(request):
-    start = datetime.datetime.now()
     data = {}
     salon = request.session.get("salon")
-    message = request.session.get("message")
-    data["message"] = message
     if salon is None:
         new_salon = get_random_salon()
         request.session["salon"] = new_salon.get_session_data()
@@ -29,6 +23,4 @@ def main(request):
     data["info"] = info
     data["salon_form"] = SelectSalonForm()
     data["appointment_form"] = AppointmentForm(salon_pk=salon["pk"])
-    end = datetime.datetime.now()
-    ic(end - start)
     return render(request, "home/main.html", data)

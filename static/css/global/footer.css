@@ -1,6 +1,4 @@
 footer {
-  margin-top: auto;
-  z-index: 2;
   position: relative;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -13,5 +11,37 @@ footer {
     left: 0;
     height: 5px;
     border-top: 2px dashed #fff;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  .list-link-footer li a {
+    text-decoration: none; !important;
+    color: #FFF; !important;
+    transition: color .5s ease-in-out;
+  }
+
+  .list-link-footer h2 {
+    color: #FFF;
+  }
+
+  .list-link-footer li a:hover {
+    color: #a1a1a1;
+  }
+
+  .footer-body{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .map {
+    height: 150px;
+    width: 300px;
+    border-radius: 10px;
+    background: #FFF;
   }
 }

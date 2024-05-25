@@ -10,10 +10,9 @@
     <div class="notify">
         {% include 'components/notify.html' with message=message %}
     </div>
-    <div class="container-about">
-        <h1>Почему именно мы</h1>
+    <section class="abouts">
         {% include 'home/about.block.html' with abouts=abouts %}
-    </div>
+    </section>
     <div class="container-masters">
         <h1>Наши лучшие мастера</h1>
         {% include 'components/master/slider.html' with slides=masters %}

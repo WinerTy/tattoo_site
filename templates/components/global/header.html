@@ -1,32 +1,35 @@
 {% load static %}
-
-<link rel="stylesheet" href="{% static 'css/header.css' %}">
-<link rel="stylesheet" href="{% static 'css/modal.css' %}">
-<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-      <span class="fs-4">BARAKA</span>
-    </a>
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <div class="control-items">
-          <span class="close">&times;</span>
-        </div>
-        <h3>Вы можете изменить салон при помощи выпадающего списка</h3>
-        <form class="modal-form" method="post" action="{% url 'select_salon' %}">
-          {% csrf_token %}
-          {{salon_form.as_div}}
-          <button type="submit" class="button">Подтвердить</button>
-      </form> 
-      </div>
+<!-- <div id="modal" class="modal">
+  <div class="modal-content">
+    <div class="control-items">
+      <span class="close">&times;</span>
     </div>
-
-    <ul class="nav nav-pills">
-      <li class="nav-item"><button class="nav-link" id="openModalBtn">{% if request.session.salon.name %}{{request.session.salon.name}}{% else %}Выберите салон{% endif %}</button></li>
-      <li class="nav-item"><a href="{% url 'home' %}" class="nav-link" aria-current="page">Главная</a></li>
-      <li class="nav-item"><a href="{% url 'masters' %}" class="nav-link">Мастера</a></li>
-      <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">О нас</a></li>
-      <li class="nav-item"><a href="{% url 'clear' %}" class="nav-link">Очистить сессию</a></li>
+    <h3>Вы можете изменить салон при помощи выпадающего списка</h3>
+    <form class="modal-form" method="post" action="{% url 'select_salon' %}">
+      {% csrf_token %}
+      {{salon_form.as_div}}
+      <button type="submit" class="button">Подтвердить</button>
+  </form> 
+  </div>
+</div>
+<script src="{% static 'js/modal.js' %}"></script> -->
+<header>
+  <link rel="stylesheet" href="{% static 'css/global/header.css' %}">
+  <nav>
+    <a href="/"><h1 class="logo">BARAKA</h1></a>
+    <ul class="list">
+      <li><a href="#" id="openModalBtn">{% if request.session.salon.name %}{{request.session.salon.name}}{% else %}Выберите салон{% endif %}</a></li>
+      <li><a href="#">Мастера</a></li>
+      <li><a href="#">О нас</a></li>
+      <li><a href="#">{% if request.user.is_authenticated %}Профиль{% else %}Войти{% endif %}</a></li>
     </ul>
+    <button class="menu" onclick="toggleMenu()">Menu</button>
+  </nav>
 </header>
-<script src="{% static 'js/modal.js' %}"></script>
+
+<script>
+  function toggleMenu() {
+    var list = document.querySelector('.list');
+    list.classList.toggle('active');
+  }
+</script>

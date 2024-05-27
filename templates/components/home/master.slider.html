@@ -1,0 +1,95 @@
+<style>
+    .mySwiper {
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        overflow-x: hidden;
+    }
+    .slide-image {
+        position: relative;
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .slide-image img {
+        border-radius: 50%;
+        display: block;
+        width: 100%;
+        transition: transform 0.5s ease;
+    }
+
+    .slide-image span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        color: white;
+        font-size: 24px;
+    }
+
+    .slide-image:hover img {
+        transform: scale(1.2);
+    }
+
+    .slide-image:hover span {
+        display: block;
+    }
+    .swiper-slide {
+        background-color: black;
+    }
+</style>
+<div class="container-masters asdsadsasad">
+    <h1>Наши лучшие мастера</h1>
+    <div class="master-slider asdsadsasad">
+        <div class="mySwiper">
+            <div class="swiper-wrapper">
+                {% for slide in slides  %}
+                    <div class="swiper-slide">
+                        <div class="slide">
+                            <div class="slide-image">
+                                <img src="{{ slide.photo.url }}" />
+                                <span>
+                                {% if slide.tattoo_type.first %}
+                                    {{ slide.tattoo_type.first }}
+                                {% endif %}
+                                </span>
+                            </div>
+                            <div class="slide-content">
+                                <p>{{ slide.name }}</p>
+                                <div class="site-button btn-one">
+                                    <a href="{% url 'master-info' slide.pk %}">Подробнее</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>    
+</div>
+
+<script>
+    var swiper = new Swiper(".mySwiper", {
+        autoplay: { delay: 20000, pauseOnMouseEnter: true },
+        loop: true,
+        slidesPerView: 1,
+        centeredSlides: true,
+        initialSlide: 0,
+        breakpoints: {
+            390: {
+                slidesPerView: 1,
+            },
+            768: {
+                slidesPerView: 2.5,
+            },
+            1200: {
+                slidesPerView: 3,
+            },
+        },
+    });
+</script>

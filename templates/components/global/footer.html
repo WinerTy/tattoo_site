@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="{% static 'css/global/footer.css'%}">
 <script src="https://api-maps.yandex.ru/2.1/?apikey=d17123bd-3142-47c8-9496-8cb21e6d450f&lang=ru_RU"
  type="text/javascript"></script>
-<footer>
+<footer class="asdsadsasad">
     <div class="container">
         <div class="footer-body py-3">
             <ul class="list-link-footer">
@@ -11,9 +11,6 @@
                 <li class="nav-item"><a href="{% url 'home' %}">Мастера</a></li>
                 <li class="nav-item"><a href="{% url 'about' %}">О нас</a></li>
             </ul>
-            <div class="map">
-                <div id="map"></div>
-            </div>
         </div>
         <p class="text-center text-body-secondary">&copy; 2024 BARAKA, Inc</p>
     </div>
@@ -25,7 +22,7 @@
       var myMap = new ymaps.Map("map", {
         center: [{{ request.session.salon.latitude }}, {{ request.session.salon.longitude }}],
         zoom: 15,
-        controls: [ 'fullscreenControl'],
+        controls: [],
         zoomRange: [10,15]
       });
 
@@ -39,12 +36,22 @@
 </script>
 
 <style>
-  .map {
-    display: flex;
-    justify-content: center;
+  @media (max-width: 750px) {
+    .map {
+      display: none;
+      background-color: none;
+    }
   }
   #map {
     width: 800px;
     height: 200px;
+  }
+  .map {
+    display: flex;
+    justify-content: center;
+    height: 150px;
+    width: 300px;
+    border-radius: 10px;
+    background: #FFF;
   }
 </style>

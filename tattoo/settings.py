@@ -16,9 +16,9 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
+# INTERNAL_IPS = [
+#     "127.0.0.1",
+# ]
 # Application definition
 
 INSTALLED_APPS = [
@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     "site_setting",
     "pages",
     "database",
-    "debug_toolbar",
+    # "debug_toolbar",
     "image_uploader_widget",
     "fontawesomefree",
 ]

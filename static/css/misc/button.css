@@ -71,3 +71,10 @@
       }
     }
   }
+
+  @media screen and (max-width: 569px) {
+    .submit-button {
+      width: 100%;
+    }
+    
+  }

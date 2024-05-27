@@ -3,15 +3,8 @@
 {%block content%}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <div class="slider">
-        {% include 'components/slider.html' with slides=slides %}
-    </div>
-    <section class="abouts">
+        {% include 'components/home/slider.html' with slides=slides %}
         {% include 'home/about.block.html' with abouts=abouts %}
-    </section>
-    <div class="container-masters">
-        <div><h1>Наши лучшие мастера</h1></div>
-        {% include 'components/master/slider.html' with slides=masters %}
-    </div>
-        {% include 'components/form.html' with form=appointment_form link='appointment' title='Записаться на сеанс' %}
+        {% include 'components/home/master.slider.html' with slides=masters %}
+        {% include 'components/home/form.html' with form=appointment_form %}
 {%endblock%}

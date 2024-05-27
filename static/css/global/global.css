@@ -47,3 +47,17 @@ h3 {
   font-family: 'NEXT-ART', sans-serif;
   font-weight: 800;
 }
+
+  
+.form-control, textarea {
+  max-width: 400px;
+  background-color: #000 !important;
+  color: #fff !important;
+  letter-spacing: 1px;
+}
+
+
+.asdsadsasad {
+  max-width: 1440px;
+  margin-inline: auto;
+}

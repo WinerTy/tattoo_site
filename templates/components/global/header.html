@@ -1,11 +1,11 @@
 {% load static %}
-<header>
+<header class="asdsadsasad">
   <link rel="stylesheet" href="{% static 'css/global/header.css' %}">
   <link rel="stylesheet" href="{% static 'css/modal.css' %}">
   <nav>
     <a href="/"><h1 class="logo">BARAKA</h1></a>
     <ul class="list">
-      <li><a href="#" id="openModalBtn">{% if request.session.salon.name %}{{request.session.salon.name}}{% else %}Выберите салон{% endif %}</a></li>
+      <li><a href="#modaltab" id="openModalBtn">{% if request.session.salon.name %}{{request.session.salon.name}}{% else %}Выберите салон{% endif %}</a></li>
       <li><a href="{% url 'masters' %}">Мастера</a></li>
       <li><a href="{% url 'about' %}">О нас</a></li>
       <li><a href="#">{% if request.user.is_authenticated %}Профиль{% else %}Войти{% endif %}</a></li>

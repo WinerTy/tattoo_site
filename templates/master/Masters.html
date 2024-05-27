@@ -1,13 +1,7 @@
 {% extends 'base.html' %}
-{%block header%}
-{% include 'components/global/header.html' %}
-{%endblock%}
 {%block content%}
 <h1>Наши мастера</h1>
 {% include 'home/masters.block.html' %}
 {% include 'components/global/pagination.html' %}
-{%endblock%}
-{%block footer%}
-{% include 'components/global/footer.html' with info=info %}
 {%endblock%}
 

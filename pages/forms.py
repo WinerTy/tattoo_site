@@ -2,6 +2,8 @@ from django import forms
 from database.models import Master
 
 from site_setting.models import Salon
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 
 class AppointmentForm(forms.Form):

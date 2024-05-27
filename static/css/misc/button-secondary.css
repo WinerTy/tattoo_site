@@ -10,7 +10,7 @@
     transition: all 0.3s;
     position: relative;
   }
-  .btn-one a {
+  .btn-one a, button {
     transition: all 0.3s;
   }
   .btn-one::before {
@@ -31,7 +31,7 @@
     border-bottom-color: rgba(255,255,255,0.5);
     transform: scale(0.1, 1);
   }
-  .btn-one:hover a {
+  .btn-one:hover a, button {
     letter-spacing: 2px;
   }
   .btn-one:hover::before {

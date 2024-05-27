@@ -5,28 +5,44 @@
   <nav>
     <a href="/"><h1 class="logo">BARAKA</h1></a>
     <ul class="list">
-      <li><a href="#modaltab" id="openModalBtn">{% if request.session.salon.name %}{{request.session.salon.name}}{% else %}Выберите салон{% endif %}</a></li>
+      <li><a id="openModalBtn">{% if request.session.salon.name %}{{request.session.salon.name}}{% else %}Выберите салон{% endif %}</a></li>
       <li><a href="{% url 'masters' %}">Мастера</a></li>
       <li><a href="{% url 'about' %}">О нас</a></li>
-      <li><a href="#">{% if request.user.is_authenticated %}Профиль{% else %}Войти{% endif %}</a></li>
+      <li><a href="#" id="openUserModal">{% if request.user.is_authenticated %}Профиль{% else %}Войти{% endif %}</a></li>
     </ul>
     <button class="menu" onclick="toggleMenu()">Menu</button>
   </nav>
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <div class="modal-title">
-        <h3>Изменить салон</h3>
-        <span class="close">&times;</span>
-      </div>
-      <div class="choices-new">
-        <form class="modal-form" id="salonForm" method="post" action="{% url 'select_salon' %}">
-          {% csrf_token %}
-          {{salon_form.as_div}}
-        <button type="submit" class="submit-button"><span>Выбрать</span><em id="selectedSalon">Выбранный салон:</em></button>
-        </form> 
-      </div>
+  {% include 'components/global/modal.html' %}
+  <div id="UserModal" class="user-modal" style="display: none;">
+    <div class="user-modal-content">
+        <div class="modal-buttons">
+            <div class="site-button btn-one" id="profileButton"><a href="#">Профиль</a></div>
+            <div class="site-button btn-one" id="settingsButton"><a href="#">Настройки</a></div>
+            <div class="site-button btn-one" id="logoutButton"><a href="#">Выход</a></div>
+            <div class="site-button btn-one" id="loginButton"><a href="#">Войти</a></div>
+            <div class="site-button btn-one" id="registerButton"><a href="#">Регистрация</a></div>
+        </div>
+        <div class="content" id="modalContent">
+            <div class="modal-text active">
+                <h1>Какойто текст</h1>
+            </div>
+            <div class="profile">
+                <h1>Username</h1>
+            </div>
+            <div class="login">
+                <form action="#" method="post">
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Password">
+                    <button type="submit">Войти</button>
+                </form>
+            </div>
+        </div>
+        <div class="control-button">
+            <span class="close" id="closeUser">&times;</span>
+        </div>
     </div>
-  </div>
+</div>
   <script src="{% static 'js/header.js' %}"></script>
   <script src="{% static 'js/modal.js' %}"></script>
+
 </header>

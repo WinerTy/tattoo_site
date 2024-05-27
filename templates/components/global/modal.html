@@ -1,0 +1,15 @@
+<div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-title">
+        <h3>Изменить салон</h3>
+        <span class="close">&times;</span>
+      </div>
+      <div class="choices-new">
+        <form class="modal-form" id="salonForm" method="post" action="{% url 'select_salon' %}">
+          {% csrf_token %}
+          {{salon_form.as_div}}
+        <button type="submit" class="submit-button"><span>Выбрать</span><em id="selectedSalon">Выбранный салон:</em></button>
+        </form> 
+      </div>
+    </div>
+  </div>

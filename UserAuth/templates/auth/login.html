@@ -1,0 +1,10 @@
+
+<div class="modal-form">
+    <form action="{% url 'user_login' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit">Войти</button>
+    </form>
+</div>
+<style>
+</style>

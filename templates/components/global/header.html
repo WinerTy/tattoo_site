@@ -1,5 +1,5 @@
 {% load static %}
-<header class="asdsadsasad">
+<header class="base">
   <link rel="stylesheet" href="{% static 'css/global/header.css' %}">
   <link rel="stylesheet" href="{% static 'css/modal.css' %}">
   <nav>
@@ -13,7 +13,7 @@
     <button class="menu" onclick="toggleMenu()">Menu</button>
   </nav>
   {% include 'components/global/modal.html' %}
-  <div id="UserModal" class="modal">
+  <div id="UserModal" class="modal base">
     <div class="modal-content user-content">
       <div class="tab">
         
@@ -41,6 +41,11 @@
                     <div class="column">
                         <p>Регистрация: {{ request.user.date_joined }}</p>
                         <p>Последний вход: {{ request.user.last_login }}</p>
+                        {% if request.user.is_superuser %}
+                            <p>Ваша роль: Администратор</p>
+                            <div class="site-button btn-one"><a href="{% url 'admin:index' %}">Перейти в админку</a></div>
+                        {% endif %}
+                            
                     </div>
     
                 </div>
@@ -72,11 +77,10 @@
   
       <div id="register" class="tabcontent">
         <h2>Регистрация</h2>
-        <form>
-          <input type="text" placeholder="Имя">
-          <input type="text" placeholder="Email">
-          <input type="password" placeholder="Пароль">
-          <button type="submit">Зарегистрироваться</button>
+        <form action="{% url 'user_register' %}" method="post">
+            {% csrf_token %}
+            {{register_form.as_p}}
+            <button type="submit" class="submit-button"><span>Зарегистрироваться</span><em></em></button>
         </form>
       </div>
       <span id="close" class="close">&times;</span>

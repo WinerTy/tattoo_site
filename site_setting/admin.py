@@ -20,6 +20,9 @@ class ContactInline(admin.TabularInline):
     verbose_name = "Контактная информация"
     verbose_name_plural = "Контактные данные"
 
+    class Media:
+        js = ("admin/js/contact.js",)
+
     def has_delete_permission(self, request, obj=None):
         return False
 

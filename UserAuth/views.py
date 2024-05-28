@@ -6,7 +6,11 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import redirect
 from pages.misc.create_message import create_message
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .forms import (
+    CustomUserCreationForm,
+    CustomAuthenticationForm,
+    CustomUserChangeForm,
+)
 
 
 def user_login(request):
@@ -53,4 +57,16 @@ def user_register(request):
             )
             return redirect("home")
 
+    return redirect("home")
+
+
+def user_change(request):
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            request.session["message"] = create_message(
+                "success", "Данные успешно изменены"
+            )
+            return redirect("home")
     return redirect("home")

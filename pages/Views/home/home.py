@@ -11,7 +11,11 @@ from django.template.loader import render_to_string
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from UserAuth.forms import CustomUserCreationForm, CustomAuthenticationForm
+from UserAuth.forms import (
+    CustomUserCreationForm,
+    CustomAuthenticationForm,
+    CustomUserChangeForm,
+)
 
 
 def main(request):
@@ -30,6 +34,7 @@ def main(request):
     else:
         data["login_form"] = CustomAuthenticationForm()
         data["register_form"] = CustomUserCreationForm()
+        data["change_form"] = CustomUserChangeForm()
     data["masters"] = masters
     data["slides"] = slides
     data["abouts"] = abouts

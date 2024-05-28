@@ -1,10 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block header %}
-    {% include "components/global/header.html" with form=salon_form %}
-{% endblock header %}
-
-
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/masterinfo.css' %}">
 <title>Мастер {{ master.name }}</title>
@@ -20,11 +15,5 @@
 </div>
 
 {% endblock content %}
-    
-{% block footer %}
-    {% include "components/global/footer.html" %}
-{% endblock footer %}
-    
-
 
 

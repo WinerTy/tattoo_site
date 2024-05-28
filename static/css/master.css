@@ -30,12 +30,6 @@
     text-align: center;
 }
 
-.master-card a {
-    color: white;
-    background-color: #007bff;
-    padding: 10px 20px;
-    border-radius: 5px;
-}
 
 .master-card a:hover {
     background-color: #0056b3;

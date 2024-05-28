@@ -45,10 +45,6 @@
     flex-wrap: wrap;
 }
 
-a {
-    text-decoration: none;
-    color: black;
-}
 
 .times {
     display: flex;

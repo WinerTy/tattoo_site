@@ -9,7 +9,7 @@
                 <span> {% if master.tattoo_type.first  %}{{ master.tattoo_type.first }}{% endif %}
                     </span>
                 <p>{{ master.short_description }}</p>
-                <p><a class="btn btn-primary" href="{% url 'master-info' master.pk %}">Подробнее &raquo;</a></p>
+                <div class="site-button btn-one" onclick="window.location.href='{% url 'master-info' master.pk %}'"><a>Подробнее</a></div>
             </div>
         {% endfor %}
     {% else %}

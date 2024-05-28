@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     "site_setting",
     "pages",
     "database",
-    "UserAuth",
+    "UserAuth.apps.UserauthConfig",
     "image_uploader_widget",
     "fontawesomefree",
 ]
@@ -83,7 +83,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "tattoo.wsgi.application"
 
-
+AUTH_USER_MODEL = "UserAuth.CustomUser"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 

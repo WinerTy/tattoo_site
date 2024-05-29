@@ -10,6 +10,7 @@ from .forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
     CustomUserChangeForm,
+    ChangeForm,
 )
 
 
@@ -30,15 +31,15 @@ def user_login(request):
             request.session["message"] = create_message(
                 "error", "Неверное имя пользователя или пароль"
             )
-            return redirect("home")
+            return redirect(request.META.get("HTTP_REFERER", "home"))
 
-    return redirect("home")
+    return redirect(request.META.get("HTTP_REFERER", "home"))
 
 
 def user_logout(request):
     logout(request)
     request.session["message"] = create_message("success", "Вы вышли из аккаунта")
-    return redirect("home")
+    return redirect(request.META.get("HTTP_REFERER", "home"))
 
 
 def user_register(request):
@@ -50,23 +51,28 @@ def user_register(request):
                 "success", "Аккаунт успешно создан"
             )
             login(request, user)
-            return redirect("home")
+            return redirect(request.META.get("HTTP_REFERER", "home"))
         else:
             request.session["message"] = create_message(
                 "error", "Произошла ошибка при регистрации"
             )
-            return redirect("home")
+            return redirect(request.META.get("HTTP_REFERER", "home"))
 
-    return redirect("home")
+    return redirect(request.META.get("HTTP_REFERER", "home"))
 
 
 def user_change(request):
     if request.method == "POST":
-        form = CustomUserChangeForm(request.POST, instance=request.user)
+        form = ChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             request.session["message"] = create_message(
                 "success", "Данные успешно изменены"
             )
-            return redirect("home")
-    return redirect("home")
+            return redirect(request.META.get("HTTP_REFERER", "home"))
+        else:
+            request.session["message"] = create_message(
+                "error", "Произошла ошибка при изменении данных"
+            )
+            return redirect(request.META.get("HTTP_REFERER", "home"))
+    return redirect(request.META.get("HTTP_REFERER", "home"))

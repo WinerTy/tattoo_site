@@ -42,7 +42,7 @@
             <form method="post" action="{% url 'user_change' %}">
                 {% csrf_token %}
                 {{ change_form.as_p }}
-                <button type="submit" class="submit-button"><span>Сохранить</span><em></em></button>
+                <button type="submit" class="submit-button"><span>Сохранить</span><em>Сохранить изменения</em></button>
             </form>
         </div>
       </div>
@@ -77,3 +77,58 @@
       <span id="close" class="close">&times;</span>
     </div>
   </div>
+  <style>
+    .column {
+        float: left;
+        width: 50%;
+        box-sizing: border-box;
+    }
+    
+    .main-info::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .profile {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .user-content {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    .tab {
+        display: flex;
+        flex-direction: column;
+        width: 30%;
+    }
+      
+      .tab div:hover {
+        background-color: #aaa;
+      }
+      
+      .tab div.active {
+        background-color: #ccc;
+      }
+      
+      .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+        width: 100%;
+      }
+
+      @media screen and (max-width: 750px) {
+        .tab {
+            width: 100%;
+        }
+        .user-content {
+            flex-direction: column;
+        }
+      }
+
+</style>

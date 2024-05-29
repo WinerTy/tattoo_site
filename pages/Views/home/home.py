@@ -10,11 +10,16 @@ from django.template.loader import render_to_string
 
 
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import (
+    UserCreationForm,
+    AuthenticationForm,
+    UserChangeForm,
+)
 from UserAuth.forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
     CustomUserChangeForm,
+    ChangeForm,
 )
 
 
@@ -30,11 +35,10 @@ def main(request):
     abouts = AboutBlock.objects.all()[:3]
     info = get_contact_info(salon)
     if request.user.is_authenticated:
-        pass
+        data["change_form"] = ChangeForm(instance=request.user)
     else:
         data["login_form"] = CustomAuthenticationForm()
         data["register_form"] = CustomUserCreationForm()
-        data["change_form"] = CustomUserChangeForm()
     data["masters"] = masters
     data["slides"] = slides
     data["abouts"] = abouts

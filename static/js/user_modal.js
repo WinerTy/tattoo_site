@@ -6,19 +6,24 @@ var btn = document.getElementById("openUserModal");
 
 var span = document.getElementById("close");
 
+  
 btn.onclick = function() {
     modal.style.display = "block";
+    document.body.classList.add("modal-open");
 }
 
 
 span.onclick = function() {
     modal.style.display = "none";
+    document.body.classList.remove("modal-open");
+    clearUrl();
 }
 
 
 window.onclick = function(event) {
     if (event.target == modal) {
     modal.style.display = "none";
+    clearUrl();
     }
 }
 

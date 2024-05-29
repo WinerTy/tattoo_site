@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
   var modal = document.querySelector("#modal");
-  var btn = document.querySelector("#openModalBtn");
+  var btn = document.querySelector("#openSalonModal");
   var span = document.querySelector(".close");
   var salonForm = document.querySelector('#salonForm');
   var selectedSalon = document.querySelector('#selectedSalon');
@@ -13,12 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
   span.addEventListener('click', function() {
     modal.style.display = "none";
     document.body.classList.remove("modal-open");
+    clearUrl();
   });
 
   window.addEventListener('click', function(event) {
     if (event.target == modal) {
       modal.style.display = "none";
       document.body.classList.remove("modal-open");
+      clearUrl();
     }
   });
 

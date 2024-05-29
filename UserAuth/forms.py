@@ -5,6 +5,7 @@ from django.contrib.auth.forms import (
 )
 from .models import CustomUser
 from django import forms
+from django.contrib.auth.hashers import make_password
 
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -51,6 +52,7 @@ class CustomUserChangeForm(UserChangeForm):
         widget=forms.PasswordInput(
             attrs={"class": "form-control", "placeholder": "Пароль"}
         ),
+        required=False,  # Поле становится необязательным
     )
 
     class Meta:
@@ -63,7 +65,58 @@ class CustomUserChangeForm(UserChangeForm):
             self.fields[fieldname].help_text = None
             self.fields[fieldname].label = ""
             self.fields[fieldname].widget.attrs.update({"class": "form-control"})
+            self.fields[fieldname].required = False
 
         self.fields["username"].widget.attrs.update({"placeholder": "Логин"})
         self.fields["email"].widget.attrs.update({"placeholder": "Электронная почта"})
         self.fields["password"].widget.attrs.update({"placeholder": "Пароль"})
+
+
+class ChangeForm(forms.ModelForm):
+    old_password = forms.CharField(
+        label="",
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "Текущий пароль"}
+        ),
+        required=False,
+    )
+    new_password = forms.CharField(
+        label="",
+        widget=forms.PasswordInput(
+            attrs={"class": "form-control", "placeholder": "Новый пароль"}
+        ),
+        required=False,
+    )
+
+    class Meta:
+        model = CustomUser
+        fields = ("username", "email", "phone", "old_password", "new_password")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for fieldname in ["username", "email", "phone"]:
+            self.fields[fieldname].label = ""
+            self.fields[fieldname].help_text = None
+            self.fields[fieldname].widget.attrs.update({"class": "form-control"})
+
+        self.fields["username"].widget.attrs.update({"placeholder": "Логин"})
+        self.fields["email"].widget.attrs.update({"placeholder": "Электронная почта"})
+        self.fields["phone"].widget.attrs.update({"placeholder": "Номер телефона"})
+
+    def clean(self):
+        cleaned_data = super().clean()
+        old_password = cleaned_data.get("old_password")
+        new_password = cleaned_data.get("new_password")
+        if old_password and new_password:
+            if not self.instance.check_password(old_password):
+                self.add_error("old_password", "Неверный пароль")
+            else:
+                self.instance.set_password(new_password)
+        return cleaned_data
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["new_password"])
+        if commit:
+            user.save()
+        return user

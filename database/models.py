@@ -1,5 +1,6 @@
 from django.db import models
 from site_setting.models import Salon, SocialAccountIcon
+from UserAuth.models import CustomUser
 
 
 class Slider(models.Model):
@@ -40,6 +41,14 @@ class TattooType(models.Model):
 
 
 class Master(models.Model):
+    user = models.OneToOneField(
+        CustomUser,
+        on_delete=models.CASCADE,
+        verbose_name="Пользователь",
+        blank=True,
+        unique=True,
+        related_name="user_master",
+    )
     salon = models.ForeignKey(Salon, on_delete=models.CASCADE, verbose_name="Салон")
     photo = models.ImageField(upload_to="MastersPhoto/", verbose_name="Фотография")
     name = models.CharField(max_length=20, verbose_name="Имя")

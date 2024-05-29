@@ -1,4 +1,7 @@
+from collections.abc import Sequence
+from doctest import master
 from django.contrib import admin
+from django.http import HttpRequest
 from django.utils.html import format_html
 from django.db import models
 
@@ -56,8 +59,29 @@ class MasterAdmin(admin.ModelAdmin):
         css = {"all": ("css/admin/ImageUploader.css",)}
 
 
+class AppointmentAdmin(admin.ModelAdmin):
+    list_display = ["id", "master"]
+    list_filter = ["master"]
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request)
+        if request.user.is_superuser:
+            return qs
+        master = Master.objects.filter(user=request.user).first()
+        if master:
+            return qs.filter(master=master)
+        return qs.none()
+
+    def get_list_filter(self, request: HttpRequest) -> Sequence[str]:
+        if request.user.is_superuser:
+            return super().get_list_filter(request)
+        master = Master.objects.filter(user=request.user).first()
+        if master:
+            return []
+
+
 admin.site.register(Works)
 admin.site.register(Master, MasterAdmin)
-admin.site.register(Note)
+admin.site.register(Note, AppointmentAdmin)
 admin.site.register(Slider, SliderAdmin)
 admin.site.register(TattooType)

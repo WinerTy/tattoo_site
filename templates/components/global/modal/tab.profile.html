@@ -1,0 +1,25 @@
+<div id="profile" class="tabcontent">
+    <div class="profile">
+        <div class="tab-title">
+            <h1>Профиль</h1>
+        </div>
+        <div class="tab-content">
+            <div class="user-info">
+                <div class="column">
+                <p>Логин: {{ request.user.username }}</p>
+                <p>Email: <a href="mailto:{{ request.user.email }}">{{ request.user.email }}</a></p>
+                <p>Телефон: {%if request.user.phone %} <a href="tel:{{ request.user.phone }}">{{ request.user.phone }}</a> {%else%}Не указан{% endif %}</p>
+                </div>
+                <div class="column">
+                    <p>Регистрация: {{ request.user.date_joined }}</p>
+                    <p>Последний вход: {{ request.user.last_login }}</p>
+                    {% if request.user.is_superuser %}
+                        <p>Ваша роль: Администратор</p>
+                        <div class="site-button btn-one" onclick="window.location.href='{% url 'admin:index' %}'"><a>Перейти в админку</a></div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+  </div>

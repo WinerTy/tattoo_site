@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
 
-from database.models import Note
+from database.models import Appointment
 from pages.forms import AppointmentForm
 from pages.misc.create_message import create_message
 
@@ -11,7 +11,7 @@ def create_appointment(request):
             request.POST, salon_pk=request.session.get("salon").get("pk")
         )
         if form.is_valid():
-            appointment = Note.objects.create(
+            appointment = Appointment.objects.create(
                 client_email=form.cleaned_data["client_email"],
                 client_phone=form.cleaned_data["client_phone"],
                 master=form.cleaned_data["master"],

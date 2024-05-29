@@ -48,6 +48,7 @@ class Master(models.Model):
         blank=True,
         unique=True,
         related_name="user_master",
+        null=True,
     )
     salon = models.ForeignKey(Salon, on_delete=models.CASCADE, verbose_name="Салон")
     photo = models.ImageField(upload_to="MastersPhoto/", verbose_name="Фотография")
@@ -114,7 +115,7 @@ class SocialAccount(models.Model):
         return self.link
 
 
-class Note(models.Model):
+class Appointment(models.Model):
     master = models.ForeignKey(Master, on_delete=models.CASCADE)
     client_email = models.EmailField()
     client_phone = models.CharField(max_length=20)

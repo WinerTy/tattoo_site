@@ -3,81 +3,42 @@
     <div class="modal-content user-content">
       <div class="tab">
         {% if request.user.is_authenticated %}
-            <div class="site-button btn-one tablinks" onclick="openTab(event, 'profile')" id="defaultOpen"><a>Профиль</a></div>
+            <div class="site-button btn-one tablinks" onclick="openTab(event, 'profile')" id="defaultOpen"><a href="###">Профиль</a></div>
             <div class="site-button btn-one tablinks" onclick="openTab(event, 'settings')"><a>Настройки</a></div>
+            {% if 'Мастер' in request.user.groups.all|join:", " %}
+            <!-- Добавляем новую кнопку, если пользователь в группе "Мастер" -->
+            <div class="site-button btn-one tablinks" onclick="openTab(event, 'master')"><a>Мастер</a></div>
+            <div class="site-button btn-one tablinks" onclick="openTab(event, 'appointments')"><a href="#UserModal" data-href="asdasd">Записи</a></div>
+            {% endif %}
+            
             <div class="site-button btn-one tablinks" onclick="openTab(event, 'logout')"><a>Выход</a></div>
         {% else %}
             <div class="site-button btn-one tablinks" onclick="openTab(event, 'login')" id="defaultOpen"><a href="#">Вход</a></div>
-            <div class="site-button btn-one tablinks" onclick="openTab(event, 'register')"><a href="#">Регистрация</a></div>
+            <div class="site-button btn-one tablinks" onclick="openTab(event, 'register')"><a href="#" >Регистрация</a></div>
         {% endif %}
       </div>
-      <div id="profile" class="tabcontent">
-        <div class="profile">
-            <div class="tab-title">
-                <h1>Профиль</h1>
-            </div>
-            <div class="tab-content">
-                <div class="user-info">
-                    <div class="column">
-                    <p>Логин: {{ request.user.username }}</p>
-                    <p>Email: <a href="mailto:{{ request.user.email }}">{{ request.user.email }}</a></p>
-                    <p>Телефон: {%if request.user.phone %} <a href="tel:{{ request.user.phone }}">{{ request.user.phone }}</a> {%else%}Не указан{% endif %}</p>
-                    </div>
-                    <div class="column">
-                        <p>Регистрация: {{ request.user.date_joined }}</p>
-                        <p>Последний вход: {{ request.user.last_login }}</p>
-                        {% if request.user.is_superuser %}
-                            <p>Ваша роль: Администратор</p>
-                            <div class="site-button btn-one" onclick="window.location.href='{% url 'admin:index' %}'"><a>Перейти в админку</a></div>
-                        {% endif %}
-                    </div>
-    
-                </div>
-            </div>
-        </div>
-      </div>
-      <div id="settings" class="tabcontent">
-        <h2>Настройки</h2>
-        <div class="tab-content">
-            <form method="post" action="{% url 'user_change' %}">
-                {% csrf_token %}
-                {{ change_form.as_p }}
-                <button type="submit" class="submit-button"><span>Сохранить</span><em>Сохранить изменения</em></button>
-            </form>
-        </div>
-      </div>
-      <div id="logout" class="tabcontent">
-        <div class="tab-title">
-            <h2>Выйти из аккаунта</h2>
-        </div>
-        <div class="tab-content">
-            <form method="post" action="{% url 'user_logout' %}">
-                {% csrf_token %}
-                <button type="submit" class="submit-button"><span>Выйти</span><em></em></button>
-            </form>
-        </div>
-      </div>
-      <div id="login" class="tabcontent">
-        <h2>Вход</h2>
-        <form method="post" action="{% url 'user_login' %}">
-            {% csrf_token %}
-            {{login_form.as_p}}
-            <button type="submit" class="submit-button"><span>Войти</span><em></em></button>
-        </form>
-      </div>
-  
-      <div id="register" class="tabcontent">
-        <h2>Регистрация</h2>
-        <form action="{% url 'user_register' %}" method="post">
-            {% csrf_token %}
-            {{register_form.as_p}}
-            <button type="submit" class="submit-button"><span>Зарегистрироваться</span><em></em></button>
-        </form>
-      </div>
-      <span id="close" class="close">&times;</span>
-    </div>
+      
+      {% if 'Мастер' in request.user.groups.all|join:", " %}
+        {% include 'components/global/modal/tab.master.html' %}
+        {% include 'components/global/modal/tab.appointments.html' %}
+      {% endif %}
+      
+      {% include 'components/global/modal/tab.profile.html' %}
+      {% include 'components/global/modal/tab.settings.html' %}
+      {% include 'components/global/modal/tab.logout.html' %}
+      {% include 'components/global/modal/tab.login.html' %}
+      {% include 'components/global/modal/tab.register.html' %}
+      
   </div>
   <style>
+    .tab-form {
+        display: flex;
+    }
+    .tabcontent {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
     .column {
         float: left;
         width: 50%;

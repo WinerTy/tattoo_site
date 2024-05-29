@@ -1,0 +1,12 @@
+{% load static %}
+<div id="settings" class="tabcontent ">
+    <h2>Настройки</h2>
+    <div class="tab-content tab-form">
+        <form method="post" action="{% url 'user_change' %}">
+            {% csrf_token %}
+            {{ change_form.as_p }}
+            <button type="submit" class="submit-button"><span>Сохранить</span><em>Сохранить изменения</em></button>
+        </form>
+    </div>
+  </div>
+<script src="{% static 'js/admin.js' %}"></script>

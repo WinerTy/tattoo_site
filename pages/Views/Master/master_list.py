@@ -4,6 +4,12 @@ from database.models import Master
 
 from pages.misc.page_info import get_random_salon
 from pages.forms import SelectSalonForm
+from UserAuth.forms import (
+    CustomUserCreationForm,
+    CustomAuthenticationForm,
+    CustomUserChangeForm,
+    ChangeForm,
+)
 
 
 class MastersView(ListView):
@@ -12,13 +18,20 @@ class MastersView(ListView):
     context_object_name = "masters"  # Контект для использования в шаблоне
     paginate_by = 20  # Количество отоброжаемых мастеров на странице
 
-    def get_context_data(self, **kwargs):  # Унаследованная функция для получения дополнительных данных в контекст шаблона 
+    def get_context_data(
+        self, **kwargs
+    ):  # Унаследованная функция для получения дополнительных данных в контекст шаблона
         context = super().get_context_data(**kwargs)  # Вызов родительской функции
         context["salon_form"] = SelectSalonForm()  # Добавление формы для выбора салона
+        if self.request.user.is_authenticated:
+            context["change_form"] = ChangeForm(instance=self.request.user)
+        else:
+            context["login_form"] = CustomAuthenticationForm()
+            context["register_form"] = CustomUserCreationForm()
         return context  # Возврат контекста
 
     def get_queryset(self):  # Функция для получения списка мастеров
-        try: # Попытка получить список мастеров через сессию
+        try:  # Попытка получить список мастеров через сессию
             return (
                 super()
                 .get_queryset()

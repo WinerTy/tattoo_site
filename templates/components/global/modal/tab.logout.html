@@ -1,0 +1,11 @@
+<div id="logout" class="tabcontent tab-form">
+    <div class="tab-title">
+        <h2>Выйти из аккаунта</h2>
+    </div>
+    <div class="tab-content">
+        <form method="post" action="{% url 'user_logout' %}">
+            {% csrf_token %}
+            <button type="submit" class="submit-button"><span>Выйти</span><em></em></button>
+        </form>
+    </div>
+  </div>

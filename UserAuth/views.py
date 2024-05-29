@@ -16,6 +16,7 @@ from .forms import (
 
 def user_login(request):
     if request.method == "POST":
+        path = request.META.get("HTTP_REFERER", "home")
         form = CustomAuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get("username")
@@ -26,14 +27,14 @@ def user_login(request):
                 request.session["message"] = create_message(
                     "success", "Вы успешно вошли в аккаунт"
                 )
-                return redirect("home")
+                return redirect(path)
         else:
             request.session["message"] = create_message(
-                "error", "Неверное имя пользователя или пароль"
+                "danger", "Неверное имя пользователя или пароль"
             )
-            return redirect(request.META.get("HTTP_REFERER", "home"))
+            return redirect(path + "#UserModal")
 
-    return redirect(request.META.get("HTTP_REFERER", "home"))
+    return redirect(path + "#UserModal")
 
 
 def user_logout(request):
@@ -44,6 +45,7 @@ def user_logout(request):
 
 def user_register(request):
     if request.method == "POST":
+        path = request.META.get("HTTP_REFERER", "home")
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
@@ -51,14 +53,14 @@ def user_register(request):
                 "success", "Аккаунт успешно создан"
             )
             login(request, user)
-            return redirect(request.META.get("HTTP_REFERER", "home"))
+            return redirect(path)
         else:
             request.session["message"] = create_message(
-                "error", "Произошла ошибка при регистрации"
+                "danger", "Произошла ошибка при регистрации"
             )
-            return redirect(request.META.get("HTTP_REFERER", "home"))
+            return redirect(path + "#UserModal")
 
-    return redirect(request.META.get("HTTP_REFERER", "home"))
+    return redirect(path + "#UserModal")
 
 
 def user_change(request):

@@ -7,7 +7,15 @@ from django.db import models
 
 from image_uploader_widget.widgets import ImageUploaderWidget
 
-from .models import TattooType, Works, Master, Note, SocialAccount, Slider, Session
+from .models import (
+    TattooType,
+    Works,
+    Master,
+    Appointment,
+    SocialAccount,
+    Slider,
+    Session,
+)
 
 
 class SliderAdmin(admin.ModelAdmin):
@@ -82,6 +90,6 @@ class AppointmentAdmin(admin.ModelAdmin):
 
 admin.site.register(Works)
 admin.site.register(Master, MasterAdmin)
-admin.site.register(Note, AppointmentAdmin)
+admin.site.register(Appointment, AppointmentAdmin)
 admin.site.register(Slider, SliderAdmin)
 admin.site.register(TattooType)

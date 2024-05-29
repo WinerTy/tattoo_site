@@ -22,6 +22,11 @@ from UserAuth.forms import (
     ChangeForm,
 )
 
+def get_master_info(user):
+    master = Master.objects.filter(user=user).first()
+    if master:
+        Appointment
+        return master
 
 def main(request):
     data = {}

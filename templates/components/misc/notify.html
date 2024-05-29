@@ -11,7 +11,7 @@
           </div>
         {% endif %}
             
-        {% if message.type == 'danger'  %}
+        {% if request.session.message.type == 'danger'  %}
         <div class="danger">
             <i class="far fa-times-circle shine" style="font-size: 1.5em;"></i>
             &nbsp; &nbsp;

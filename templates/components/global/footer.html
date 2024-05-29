@@ -2,19 +2,24 @@
 <link rel="stylesheet" href="{% static 'css/global/footer.css'%}">
 <script src="https://api-maps.yandex.ru/2.1/?apikey=d17123bd-3142-47c8-9496-8cb21e6d450f&lang=ru_RU"
  type="text/javascript"></script>
-<footer class="base">
-    <div class="container">
-        <div class="footer-body py-3">
-            <ul class="list-link-footer">
-                <h2>Ссылки:</h2>
-                <li class="nav-item"><a href="{% url 'home' %}">Главная</a></li>
-                <li class="nav-item"><a href="{% url 'home' %}">Мастера</a></li>
-                <li class="nav-item"><a href="{% url 'about' %}">О нас</a></li>
-            </ul>
-        </div>
-        <p class="text-center text-body-secondary">&copy; 2024 BARAKA, Inc</p>
-    </div>
-  </footer>
+ <footer class="base">
+  <div class="container">
+      <div class="footer-body py-3">
+          <div class="links">
+              <ul class="list-link-footer">
+                  <h2>Ссылки:</h2>
+                  <li class="nav-item"><a href="{% url 'home' %}">Главная</a></li>
+                  <li class="nav-item"><a href="{% url 'home' %}">Мастера</a></li>
+                  <li class="nav-item"><a href="{% url 'about' %}">О нас</a></li>
+              </ul>
+          </div>
+          <div class="map">
+              <div id="map"></div>
+          </div>
+      </div>
+        <p class="copyright text-center text-body-secondary">&copy; 2024 BARAKA, Inc</p>
+  </div>
+</footer>
 
 <script>
   ymaps.ready(init);
@@ -34,24 +39,3 @@
       myMap.geoObjects.add(myPlacemark);
   }
 </script>
-
-<style>
-  @media (max-width: 750px) {
-    .map {
-      display: none;
-      background-color: none;
-    }
-  }
-  #map {
-    width: 800px;
-    height: 200px;
-  }
-  .map {
-    display: flex;
-    justify-content: center;
-    height: 150px;
-    width: 300px;
-    border-radius: 10px;
-    background: #FFF;
-  }
-</style>

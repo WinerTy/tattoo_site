@@ -117,9 +117,15 @@ class SocialAccount(models.Model):
 
 class Appointment(models.Model):
     master = models.ForeignKey(Master, on_delete=models.CASCADE)
+    types = models.ManyToManyField(
+        TattooType,
+        blank=True,
+        verbose_name="Интересующие типы тату",
+    )
     client_email = models.EmailField()
     client_phone = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
+    client_name = models.CharField(max_length=100)
 
     class Meta:
         verbose_name = "Запись"

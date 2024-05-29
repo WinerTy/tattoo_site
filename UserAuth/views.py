@@ -65,16 +65,17 @@ def user_register(request):
 
 def user_change(request):
     if request.method == "POST":
+        path = request.META.get("HTTP_REFERER", "home")
         form = ChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
             request.session["message"] = create_message(
                 "success", "Данные успешно изменены"
             )
-            return redirect(request.META.get("HTTP_REFERER", "home"))
+            return redirect(path + "#UserModal")
         else:
             request.session["message"] = create_message(
                 "error", "Произошла ошибка при изменении данных"
             )
-            return redirect(request.META.get("HTTP_REFERER", "home"))
-    return redirect(request.META.get("HTTP_REFERER", "home"))
+            return redirect(path + "#UserModal")
+    return redirect(path + "#UserModal")

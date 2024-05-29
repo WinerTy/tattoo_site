@@ -1,32 +1,14 @@
 from django.shortcuts import render
-from django.http import JsonResponse
-from django.template.loader import render_to_string
-from database.models import Master, Slider
+from database.models import Master, Slider, Appointment
 from site_setting.models import AboutBlock
 from pages.forms import AppointmentForm, SelectSalonForm
-from pages.misc.page_info import get_contact_info, get_random_salon
-from django.http import JsonResponse
-from django.template.loader import render_to_string
-
-
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import (
-    UserCreationForm,
-    AuthenticationForm,
-    UserChangeForm,
-)
+from pages.misc.page_info import get_contact_info, get_random_salon, get_master_info
 from UserAuth.forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
-    CustomUserChangeForm,
     ChangeForm,
 )
 
-def get_master_info(user):
-    master = Master.objects.filter(user=user).first()
-    if master:
-        Appointment
-        return master
 
 def main(request):
     data = {}
@@ -38,16 +20,16 @@ def main(request):
     masters = Master.objects.filter(is_active=True, salon__pk=salon.get("pk"))
     slides = Slider.objects.filter(is_active=True)
     abouts = AboutBlock.objects.all()[:3]
-    info = get_contact_info(salon)
     if request.user.is_authenticated:
         data["change_form"] = ChangeForm(instance=request.user)
+        data["master_info"] = get_master_info(request.user)
     else:
         data["login_form"] = CustomAuthenticationForm()
         data["register_form"] = CustomUserCreationForm()
     data["masters"] = masters
     data["slides"] = slides
     data["abouts"] = abouts
-    data["info"] = info
+    data["info"] = get_contact_info(salon)
     data["salon_form"] = SelectSalonForm()
     data["appointment_form"] = AppointmentForm(salon_pk=salon["pk"])
     return render(request, "home/main.html", data)

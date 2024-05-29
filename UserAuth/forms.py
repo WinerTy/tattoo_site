@@ -73,24 +73,10 @@ class CustomUserChangeForm(UserChangeForm):
 
 
 class ChangeForm(forms.ModelForm):
-    old_password = forms.CharField(
-        label="",
-        widget=forms.PasswordInput(
-            attrs={"class": "form-control", "placeholder": "Текущий пароль"}
-        ),
-        required=False,
-    )
-    new_password = forms.CharField(
-        label="",
-        widget=forms.PasswordInput(
-            attrs={"class": "form-control", "placeholder": "Новый пароль"}
-        ),
-        required=False,
-    )
 
     class Meta:
         model = CustomUser
-        fields = ("username", "email", "phone", "old_password", "new_password")
+        fields = ("username", "email", "phone")
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -102,21 +88,3 @@ class ChangeForm(forms.ModelForm):
         self.fields["username"].widget.attrs.update({"placeholder": "Логин"})
         self.fields["email"].widget.attrs.update({"placeholder": "Электронная почта"})
         self.fields["phone"].widget.attrs.update({"placeholder": "Номер телефона"})
-
-    def clean(self):
-        cleaned_data = super().clean()
-        old_password = cleaned_data.get("old_password")
-        new_password = cleaned_data.get("new_password")
-        if old_password and new_password:
-            if not self.instance.check_password(old_password):
-                self.add_error("old_password", "Неверный пароль")
-            else:
-                self.instance.set_password(new_password)
-        return cleaned_data
-
-    def save(self, commit=True):
-        user = super().save(commit=False)
-        user.set_password(self.cleaned_data["new_password"])
-        if commit:
-            user.save()
-        return user

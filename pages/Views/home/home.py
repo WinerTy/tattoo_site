@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from database.models import Master, Slider, Appointment
 from site_setting.models import AboutBlock
-from pages.forms import AppointmentForm, SelectSalonForm
+from pages.forms import AppointmentForm, SelectSalonForm, MasterForm
 from pages.misc.page_info import (
     get_contact_info,
     get_random_salon,
@@ -13,11 +13,13 @@ from UserAuth.forms import (
     CustomAuthenticationForm,
     ChangeForm,
 )
+from icecream import ic
 
 
 def main(request):
     data = {}
     salon = request.session.get("salon")
+    user_master = Master.objects.filter(user=request.user).first()
     if salon is None:
         new_salon = get_random_salon()
         request.session["salon"] = new_salon.get_session_data()
@@ -28,6 +30,7 @@ def main(request):
     if request.user.is_authenticated:
         data["change_form"] = ChangeForm(instance=request.user)
         data["master_info"] = get_master_info(request.user)
+        data["master_form"] = MasterForm(instance=user_master)
     else:
         data["login_form"] = CustomAuthenticationForm()
         data["register_form"] = CustomUserCreationForm()

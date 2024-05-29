@@ -1,9 +1,6 @@
 from django import forms
 from database.models import Master, Appointment, TattooType
-from django.core.validators import MaxLengthValidator
 from site_setting.models import Salon
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 
 
 class AppointmentForm(forms.ModelForm):
@@ -59,3 +56,41 @@ class SelectSalonForm(forms.Form):
         empty_label="Выберите салон",
         widget=forms.Select(attrs={"class": "form-control"}),
     )
+
+
+class MasterForm(forms.ModelForm):
+
+    class Meta:
+        model = Master
+        fields = [
+            "name",
+            "description",
+            "photo",
+            "tattoo_type",
+        ]
+        widgets = {
+            "name": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Имя"}
+            ),
+            "description": forms.Textarea(
+                attrs={"class": "form-control", "placeholder": "Описание"}
+            ),
+            "photo": forms.FileInput(
+                attrs={"class": "form-control", "placeholder": "Фото"}
+            ),
+            "tattoo_type": forms.SelectMultiple(
+                attrs={"class": "form-control", "placeholder": "Типы тату"}
+            ),
+        }
+        labels = {
+            "name": "",
+            "description": "",
+            "photo": "Фотография",
+            "tattoo_type": "Типы тату",
+        }
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+        if self.user:
+            self.fields["master"].queryset = Master.objects.filter(user=self.user)

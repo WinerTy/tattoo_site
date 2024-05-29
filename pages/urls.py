@@ -10,6 +10,7 @@ from .Views import (
     WokrView,
     AboutInfo,
 )
+from .Views.func.upd_master import update_master_info
 
 urlpatterns = [
     path("", main, name="home"),
@@ -21,4 +22,5 @@ urlpatterns = [
     path("select_salon/", select_salon, name="select_salon"),
     path("clear/", clear_session, name="clear"),
     path("appointment/", create_appointment, name="appointment"),
+    path("update_master/", update_master_info, name="update_master"),
 ]

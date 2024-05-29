@@ -1,5 +1,9 @@
 :root {
-    --primary-color: black;
-    --secondary-color: white;
+    --primary: #1A1A1D;
+    --secondary: #4E4E50;
+    --tertiary: #6F2232;
+    --quaternary: #950740;
+    --quinary: #C3073F;
+    --white: #fff;
     --border-color-primary: #28e410;
   }

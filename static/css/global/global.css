@@ -34,7 +34,7 @@ h3 {
 }
 
 .btn-primary {
-  background-color: #c54809 !important;
+  background-color: var(--quinary) !important;
   border-color: transparent !important;
 }
 

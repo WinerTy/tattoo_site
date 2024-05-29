@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from database.models import Master, Slider, Appointment
+from database.models import Master, Slider
 from site_setting.models import AboutBlock
 from pages.forms import AppointmentForm, SelectSalonForm, MasterForm
 from pages.misc.page_info import (
@@ -13,13 +13,11 @@ from UserAuth.forms import (
     CustomAuthenticationForm,
     ChangeForm,
 )
-from icecream import ic
 
 
 def main(request):
     data = {}
     salon = request.session.get("salon")
-    user_master = Master.objects.filter(user=request.user).first()
     if salon is None:
         new_salon = get_random_salon()
         request.session["salon"] = new_salon.get_session_data()
@@ -28,6 +26,7 @@ def main(request):
     slides = Slider.objects.filter(is_active=True)
     abouts = AboutBlock.objects.all()[:3]
     if request.user.is_authenticated:
+        user_master = Master.objects.filter(user=request.user).first()
         data["change_form"] = ChangeForm(instance=request.user)
         data["master_info"] = get_master_info(request.user)
         data["master_form"] = MasterForm(instance=user_master)

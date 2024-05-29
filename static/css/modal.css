@@ -9,23 +9,24 @@
   }
   
   .modal-content {
-    background-color: var(--primary-color);
+    background-color: var(--primary);
     margin: 15% auto;
     padding: 20px;
-    border: 1px solid #888;
+    border: 1px solid var(--white);
     width: 60%;
   }
   
   .close {
-    color: #aaa;
+    color: var(--white) !important;
     float: right;
     font-size: 28px;
     font-weight: bold;
+    height: 10px;
   }
   
   .close:hover,
   .close:focus {
-    color: black;
+    color: var(--quinary);
     text-decoration: none;
     cursor: pointer;
   }

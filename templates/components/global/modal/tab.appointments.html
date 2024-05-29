@@ -1,20 +1,67 @@
-<div id="appointments" class="tabcontent">
-    <div class="tab-title">
-        <h1>Мои записи</h1>
+<div id="appointments" class="tabcontent appointments">
+    <div class="tab-title appointment-title">
+        <strong>Последние записи</strong>
     </div>
     <div class="tab-content">
         {% for appointment in master_info.appointments %}
         <div class="appointment-card">
             <div class="card-title">
-                <h3>Номер записи №{{ appointment.pk }}</h1>
+                <h3>Запись №{{ appointment.pk }}</h3>
+                <p>{% if appointment.status %}<i class="far fa-check" style="color: green; font-size: 1.5em;"></i> &nbsp; &nbsp;{% else %}<i class="far fa-times-circle" style="color: red; font-size: 1.5em;"></i>{% endif %}</p>
+                <div class="site-button btn-one" onclick="window.location.href='{% url 'admin:database_appointment_change' appointment.pk %}'"><a>Подробнее</a></div>
             </div>
             <div class="card-body">
-                
+                <div class="name">
+                    <p><strong>Имя клиента: </strong>{{ appointment.client_name }}</p>
+                </div>
+                <div class="contact-info">
+                    <strong>Контактная информация</strong>
+                    <p>Email: <a class="sub-text" href="mailto:{{ appointment.client_email }}">{{ appointment.client_email }}</a></p>
+                    <p>Телефон: <a class="sub-text" href="tel:{{ appointment.client_phone }}">{{ appointment.client_phone }}</a></p>
+                </div>
+                <div class="date-info">
+                    <strong>Создана</strong>
+                    <p>{{ appointment.created_at }}</p>
+                </div>
             </div>
         </div>
+        
         {% empty %}
         <h1>У вас нет записей</h1>
         {% endfor %}
-            
+        <a href="{% url 'admin:database_appointment_changelist' %}">Все записи</a>
     </div>
 </div>
+<style>
+    .appointments {
+        gap: 20px;
+    }
+    .tab-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .appointment-card {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid #ddd;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+
+    .card-title {
+        flex: 1;
+    }
+    
+    .card-body {
+        flex: 3;
+    }
+
+
+
+    
+</style>

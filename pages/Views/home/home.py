@@ -2,7 +2,12 @@ from django.shortcuts import render
 from database.models import Master, Slider, Appointment
 from site_setting.models import AboutBlock
 from pages.forms import AppointmentForm, SelectSalonForm
-from pages.misc.page_info import get_contact_info, get_random_salon, get_master_info
+from pages.misc.page_info import (
+    get_contact_info,
+    get_random_salon,
+    get_master_info,
+    check_groups,
+)
 from UserAuth.forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
@@ -26,6 +31,7 @@ def main(request):
     else:
         data["login_form"] = CustomAuthenticationForm()
         data["register_form"] = CustomUserCreationForm()
+    data["is_master"] = check_groups(request, "Мастер")
     data["masters"] = masters
     data["slides"] = slides
     data["abouts"] = abouts

@@ -126,6 +126,9 @@ class Appointment(models.Model):
     client_phone = models.CharField(max_length=20)
     created_at = models.DateTimeField(auto_now_add=True)
     client_name = models.CharField(max_length=100)
+    status = models.BooleanField(
+        default=False, verbose_name="Ответил", help_text="Мастер дал ответ клиенту"
+    )
 
     class Meta:
         verbose_name = "Запись"

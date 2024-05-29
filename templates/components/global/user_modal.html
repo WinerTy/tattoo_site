@@ -8,7 +8,7 @@
             {% if 'Мастер' in request.user.groups.all|join:", " %}
             <!-- Добавляем новую кнопку, если пользователь в группе "Мастер" -->
             <div class="site-button btn-one tablinks" onclick="openTab(event, 'master')"><a>Мастер</a></div>
-            <div class="site-button btn-one tablinks" onclick="openTab(event, 'appointments')"><a href="#UserModal" data-href="asdasd">Записи</a></div>
+            <div class="site-button btn-one tablinks" onclick="openTab(event, 'appointments')"><a href="#UserModal" data-href="asdasd">Последние записи</a></div>
             {% endif %}
             
             <div class="site-button btn-one tablinks" onclick="openTab(event, 'logout')"><a>Выход</a></div>
@@ -18,7 +18,7 @@
         {% endif %}
       </div>
       
-      {% if 'Мастер' in request.user.groups.all|join:", " %}
+      {% if is_master %}
         {% include 'components/global/modal/tab.master.html' %}
         {% include 'components/global/modal/tab.appointments.html' %}
       {% endif %}
@@ -77,9 +77,7 @@
       
       .tabcontent {
         display: none;
-        padding: 6px 12px;
         border: 1px solid #ccc;
-        border-top: none;
         width: 100%;
       }
 

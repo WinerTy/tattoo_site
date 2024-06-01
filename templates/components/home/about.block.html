@@ -30,7 +30,7 @@
     position: relative;
     border-radius: 16px;
     box-shadow: none;
-    background: #fff;
+    background: var(--secondary);
     transform-origin: center;
     transition: all 0.4s ease-in-out;
     overflow: hidden;
@@ -48,7 +48,7 @@
     margin: 0 0 18px 0;
     font-size: 1.9rem;
     letter-spacing: 0.06em;
-    color: var(--title-color);
+    color: var(--white);
     transition: color 0.3s ease-out;
   }
   
@@ -74,11 +74,11 @@
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    color: #28666e;
+    color: var(--quinary)!important;
   }
   
   article a:focus {
-    outline: 1px dotted #28666e;
+    outline: 1px dotted var(--white);
   }
   
   article a .icon {
@@ -91,7 +91,6 @@
     transition: all 0.3s;
   }
   
-  /* using the has() relational pseudo selector to update our custom properties */
   article:has(:hover, :focus) {
     --img-scale: 1.1;
     --title-color: #28666e;

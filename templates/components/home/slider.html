@@ -38,6 +38,13 @@
         object-fit: cover;
         overflow: hidden;
       }
+      .swiper-button-next, .swiper-button-prev {
+        color:var(--quinary) !important;
+      }
+      .swiper-pagination-bullet-active, .swiper-scrollbar-drag {
+        background: var(--quinary) !important;
+      }
+      
       @media screen and (max-width: 1024px) {
         .swiper, .slider {
           width: 100%;
@@ -57,7 +64,7 @@
         direction: 'horizontal',
         loop: true,
         autoplay: {
-          delay: 10000,
+          delay: 10000000000000,
           disableOnInteraction: false,
         },
       

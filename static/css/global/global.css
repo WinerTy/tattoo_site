@@ -45,6 +45,7 @@ h3 {
 .text {
   font-family: 'Onest', sans-serif;
   font-weight: 400;
+  color: var(--white);
 }
 
 .text-notify {

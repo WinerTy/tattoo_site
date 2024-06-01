@@ -67,7 +67,7 @@ header {
     top: 100px;
     left: 0;
     width: 100%;
-    background-color: var(--primary-color);
+    background-color: var(--primary);
     padding: 10px;
     box-sizing: border-box;
   }
@@ -82,7 +82,7 @@ header {
     padding: 10px;
     font-family: "Onest", sans-serif;
     font-weight: 700;
-    color: var(--secondary-color);
+    color: var(--white);
     text-decoration: none;
   }
   

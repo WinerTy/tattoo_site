@@ -15,11 +15,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
+
 INSTALLED_APPS = [
     "jazzmin",
     "django.contrib.admin",
@@ -34,7 +30,6 @@ INSTALLED_APPS = [
     "UserAuth.apps.UserauthConfig",
     "image_uploader_widget",
     "fontawesomefree",
-    "debug_toolbar",
 ]
 
 

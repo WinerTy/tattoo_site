@@ -17,15 +17,20 @@
         {% endif %}
       </div>
       
-      {% if is_master %}
-        {% include 'components/global/modal/tab.master.html' %}
-      {% endif %}
       
-      {% include 'components/global/modal/tab.profile.html' %}
-      {% include 'components/global/modal/tab.settings.html' %}
-      {% include 'components/global/modal/tab.logout.html' %}
-      {% include 'components/global/modal/tab.login.html' %}
-      {% include 'components/global/modal/tab.register.html' %}
+
+      {% if not request.user.is_authenticated %}
+        {% include 'components/global/modal/tabs/login.html' %}
+        {% include 'components/global/modal/tabs/register.html' %}
+      {% else %}
+      {% include 'components/global/modal/tabs/profile.html' %}
+        {% include 'components/global/modal/tabs/settings.html' %}
+        {% include 'components/global/modal/tabs/logout.html' %}
+      {% endif %}
+      {% if is_master %}
+        {% include 'components/global/modal/tabs/master.html' %}
+      {% endif %}
+
       <span id="close" class="close modal-close">&times;</span>
   </div>
   <style>
@@ -69,7 +74,7 @@
       
       .tabcontent {
         display: none;
-        border: 1px solid #ccc;
+        border: 1px solid var(--white);
         width: 100%;
         
       }
@@ -80,6 +85,9 @@
         }
         .user-content {
             flex-direction: column;
+        }
+        .settings-form {
+            width: 100%;
         }
       }
 

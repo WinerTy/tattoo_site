@@ -2,36 +2,42 @@ from django.views.generic import ListView
 
 from database.models import Master
 
-from pages.misc.page_info import get_random_salon
 from pages.forms import SelectSalonForm
 from UserAuth.forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
-    CustomUserChangeForm,
     ChangeForm,
 )
+from pages.misc.page_info import (
+    get_random_salon,
+    get_master_info,
+    check_groups,
+)
+from pages.forms import SelectSalonForm, MasterForm
 
 
 class MastersView(ListView):
     model = Master  # Модель
     template_name = "master/Masters.html"  # Шаблон для рендера
     context_object_name = "masters"  # Контект для использования в шаблоне
-    paginate_by = 4  # Количество отоброжаемых мастеров на странице
+    paginate_by = 1  # Количество отоброжаемых мастеров на странице
 
-    def get_context_data(
-        self, **kwargs
-    ):  # Унаследованная функция для получения дополнительных данных в контекст шаблона
-        context = super().get_context_data(**kwargs)  # Вызов родительской функции
-        context["salon_form"] = SelectSalonForm()  # Добавление формы для выбора салона
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["salon_form"] = SelectSalonForm()
         if self.request.user.is_authenticated:
+            user_master = Master.objects.filter(user=self.request.user).first()
             context["change_form"] = ChangeForm(instance=self.request.user)
+            context["master_info"] = get_master_info(self.request.user)
+            context["master_form"] = MasterForm(instance=user_master)
+            context["is_master"] = check_groups(self.request, "Мастер")
         else:
             context["login_form"] = CustomAuthenticationForm()
             context["register_form"] = CustomUserCreationForm()
-        return context  # Возврат контекста
+        return context
 
-    def get_queryset(self):  # Функция для получения списка мастеров
-        try:  # Попытка получить список мастеров через сессию
+    def get_queryset(self):
+        try:
             return (
                 super()
                 .get_queryset()
@@ -41,7 +47,7 @@ class MastersView(ListView):
                 )
                 .order_by("name")
             )
-        except Exception:  # при ошибке выдачи случайного салона
+        except Exception:
             return (
                 super()
                 .get_queryset()

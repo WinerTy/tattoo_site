@@ -56,6 +56,7 @@ class SelectSalonForm(forms.Form):
         empty_label="Выберите салон",
         widget=forms.Select(attrs={"class": "form-control"}),
     )
+    
 
 
 class MasterForm(forms.ModelForm):

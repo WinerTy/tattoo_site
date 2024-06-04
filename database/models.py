@@ -59,7 +59,7 @@ class Master(models.Model):
     tattoo_type = models.ManyToManyField(
         TattooType, blank=True, verbose_name="Типы тату"
     )
-    education = models.CharField(max_length=100, blank=True, verbose_name="Образование")
+    min_price = models.PositiveIntegerField(verbose_name="Минимальная цена")
     is_active = models.BooleanField(default=True, verbose_name="Отоброжать")
 
     class Meta:

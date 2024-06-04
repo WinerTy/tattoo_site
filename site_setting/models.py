@@ -1,4 +1,4 @@
-from os import link
+import os
 from django.db import models
 
 
@@ -85,4 +85,4 @@ class SocialAccountIcon(models.Model):
         verbose_name_plural = "Социальные сети иконки"
 
     def __str__(self):
-        return self.icon.name
+        return os.path.basename(self.icon.path)

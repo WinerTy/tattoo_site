@@ -1,0 +1,21 @@
+{% for session in times %}
+<div class="time">
+    <p>{{ session.start_time }} - {{ session.end_time }}</p>
+</div>
+{% endfor %}
+
+<style>
+.time {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    color: var(--white);
+    background-color: var(--quinary);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+.time p {
+    margin: 0;
+}
+</style>

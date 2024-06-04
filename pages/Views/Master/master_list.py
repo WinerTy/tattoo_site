@@ -20,7 +20,7 @@ class MastersView(ListView):
     model = Master  # Модель
     template_name = "master/Masters.html"  # Шаблон для рендера
     context_object_name = "masters"  # Контект для использования в шаблоне
-    paginate_by = 1  # Количество отоброжаемых мастеров на странице
+    paginate_by = 4  # Количество отоброжаемых мастеров на странице
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

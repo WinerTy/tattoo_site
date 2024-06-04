@@ -1,19 +1,63 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/masterinfo.css' %}">
-<title>Мастер {{ master.name }}</title>
-
-{% include 'components/master/master-info.html' with master=master times=working_time %}
-
-
-{% include 'components/master/master-social.html' with socials=social_accounts %}
-
-<div class="works">
-    <h1>Работы мастера</h1>
-    {% include 'components/master/masters-works.html' with works=master.works.all %}    
-</div>
-
+<section class="master-info base">
+    <div class="master-texts text">
+        <div class="master-title">
+            <h2>{{ master.tattoo_type.first }}</h2>
+            <h1>{{ master.name }}</h1>
+        </div>
+        <div class="master-description">
+            {{ master.description|safe }}
+        </div>
+        <div class="master-socials">
+            {% include 'components/master/master-social.html' with socials=social_accounts %}
+        </div>
+    </div>
+    <div class="master-photo">
+        <img src="{{ master.photo.url }}" alt="">
+    </div>
+</section>
+<section class="master-work-time base">
+    {% include 'components/master/master-work-time.html' %}
+</section>
+<section class="master-works-images base">
+    {% include 'components/master/master-works.html' with works=master.works.all %}
+</section>
+<style>
+    .master-social, .master-work-time{
+        padding: 20px;
+    }
+    .master-info{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+    .master-texts{
+        width: 50%;
+    }
+    .master-photo{
+        width: 50%;
+    }
+    .master-photo img{
+        width: 100%;
+    }
+    .master-title{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    @media screen and (max-width: 600px) {
+        .master-info{
+            flex-direction: column-reverse;
+        }
+        .master-texts{
+            width: 100%;
+        }
+        .master-photo{
+            width: 100%;
+        }
+    }
+</style>
 {% endblock content %}
-
-

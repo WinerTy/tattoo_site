@@ -11,6 +11,7 @@ from .Views import (
     AboutInfo,
 )
 from .Views.func.upd_master import update_master_info
+from .Views.Master.master_info import filter_sessions
 
 urlpatterns = [
     path("", main, name="home"),
@@ -23,4 +24,5 @@ urlpatterns = [
     path("clear/", clear_session, name="clear"),
     path("appointment/", create_appointment, name="appointment"),
     path("update_master/", update_master_info, name="update_master"),
+    path("filter_sessions/", filter_sessions, name="filter_sessions"),
 ]

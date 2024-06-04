@@ -1,6 +1,7 @@
 from django.db import models
 from site_setting.models import Salon, SocialAccountIcon
 from UserAuth.models import CustomUser
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Slider(models.Model):
@@ -53,7 +54,12 @@ class Master(models.Model):
     salon = models.ForeignKey(Salon, on_delete=models.CASCADE, verbose_name="Салон")
     photo = models.ImageField(upload_to="MastersPhoto/", verbose_name="Фотография")
     name = models.CharField(max_length=20, verbose_name="Имя")
-    description = models.TextField(blank=True, verbose_name="Описание")
+    short_description = models.TextField(
+        blank=True,
+        verbose_name="Краткое описание",
+        help_text="Текст отоброжаемый на странице со всеми мастерами",
+    )
+    description = CKEditor5Field("Описание", config_name="extends")
     works = models.ManyToManyField(Works, blank=True, verbose_name="Работы мастера")
     experience = models.PositiveIntegerField(default=0, verbose_name="Стаж работы")
     tattoo_type = models.ManyToManyField(
@@ -104,7 +110,14 @@ class SocialAccount(models.Model):
         on_delete=models.CASCADE,
         related_name="social_account",
     )
-    icon = models.OneToOneField(SocialAccountIcon, on_delete=models.CASCADE)
+    name = models.CharField(
+        max_length=20,
+        verbose_name="Название",
+        help_text="Текст который будет отображен вместо ссылки",
+    )
+    icon = models.OneToOneField(
+        SocialAccountIcon, on_delete=models.CASCADE, verbose_name="Иконка"
+    )
     link = models.URLField(verbose_name="Ссылка")
 
     class Meta:

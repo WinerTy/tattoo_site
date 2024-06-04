@@ -1,16 +1,54 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/master/master-social.css' %}">
+<h1>Социальные сети</h1>
 <div class="socials">
-    <div class="block-title">
-        <h1>Я есть в социальных сетях</h1>
-    </div>
-    <div class="socials-icons">
-        {% for social in socials %}
+    {% for social in socials %}
+    <div class="social-card">
+
         <div class="icon">
-            <a href="{{ social.link }}" target="_blank" rel="noopener noreferrer">
-                <img src="{{ social.icon.icon.url }}" alt="">
-            </a>
+            <img src="{{ social.icon.icon.url }}" alt="">
         </div>
-        {% endfor %}
+        <div class="link text">
+            <a href="{{ social.link }}">{{ social.name }}</a>
+        </div>
     </div>
+    {% endfor %}
 </div>
+<style>
+    .socials{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 20px;
+    }
+    .icon{
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .icon img{
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .link{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .link a{
+        text-decoration: none;
+        color: var(--white);
+    }
+    .link a:hover{
+        color: var(--tertiary);
+    }
+    .social-card{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+</style>

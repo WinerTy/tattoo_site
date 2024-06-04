@@ -1,10 +1,21 @@
 <div id="register" class="tabcontent">
     <h2>Регистрация</h2>
-    <form action="{% url 'user_register' %}" method="post">
+    <form action="{% url 'user_register' %}" method="post" class="modal-register">
         {% csrf_token %}
         {{register_form.as_p}}
         <button type="submit" class="submit-button"><span>Зарегистрироваться</span><em>Зарегистрироваться</em></button>
     </form>
   </div>
-  <span id="close" class="close">&times;</span>
 </div>
+
+<style>
+  @media screen and (max-width: 600px) {
+    .modal-register {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+  }
+</style>

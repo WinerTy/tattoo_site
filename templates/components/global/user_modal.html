@@ -28,7 +28,7 @@
       {% include 'components/global/modal/tab.logout.html' %}
       {% include 'components/global/modal/tab.login.html' %}
       {% include 'components/global/modal/tab.register.html' %}
-      
+      <span id="close" class="close modal-close">&times;</span>
   </div>
   <style>
     .tab-form {
@@ -45,21 +45,11 @@
         box-sizing: border-box;
     }
     
-    .main-info::after {
-        content: "";
-        display: table;
-        clear: both;
-    }
-
-    .profile {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
     .user-content {
         display: flex;
         justify-content: space-between;
         gap: 10px;
+        
     }
     .tab {
         display: flex;
@@ -79,6 +69,7 @@
         display: none;
         border: 1px solid #ccc;
         width: 100%;
+        
       }
 
       @media screen and (max-width: 750px) {

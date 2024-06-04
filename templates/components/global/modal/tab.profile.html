@@ -1,25 +1,109 @@
 <div id="profile" class="tabcontent">
     <div class="profile">
-        <div class="tab-title">
-            <h1>Профиль</h1>
-        </div>
+        <h1>Профиль</h1>
         <div class="tab-content">
             <div class="user-info">
-                <div class="column">
-                <p>Логин: {{ request.user.username }}</p>
-                <p>Email: <a href="mailto:{{ request.user.email }}">{{ request.user.email }}</a></p>
-                <p>Телефон: {%if request.user.phone %} <a href="tel:{{ request.user.phone }}">{{ request.user.phone }}</a> {%else%}Не указан{% endif %}</p>
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                      <div class="card-body">
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="mb-0 text">Фамилия Имя</h6>
+                          </div>
+                          <div class="col-sm-9 text-secondary text">
+                            {% if request.user.last_name and request.user.first_name %}
+                            {{ request.user.last_name }} {{ request.user.first_name }}
+                            {% else %}  
+                            Не указано
+                            {% endif %}
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="mb-0 text">Почта</h6>
+                          </div>
+                          <div class="col-sm-9 text-secondary text">
+                            <a class="text" href="mailto:{{ request.user.email }}">{{ request.user.email }}</a>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                          <div class="col-sm-3">
+                            <h6 class="mb-0 text">Телефон</h6>
+                          </div>
+                          <div class="col-sm-9 text-secondary text">
+                            {% if request.user.phone %}
+                            <a href="tel:{{ request.user.phone }}" class="text">{{ request.user.phone }}</a>
+                            {%else%}
+                            Не указан
+                            {% endif %}
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                              <h6 class="mb-0 text">Роли</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary text">
+                                {% if request.user.is_superuser %}
+                                <p>Админ</p>
+                                {% endif %}
+                                {% if request.user.groups %}
+                                    {% for group in request.user.groups.all %}
+                                        <p>{{ group.name }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                          </div>
+                          <hr>
+                          {% if request.user.is_superuser %}
+                          <div class="site-button btn-one tablinks" onclick="window.location.href='{% url 'admin:index'}'"><a href="#UserModal" data-href="asdasd">Админ панель</a></div>
+                          {% endif %}
+                      </div>
                 </div>
-                <div class="column">
-                    <p>Регистрация: {{ request.user.date_joined }}</p>
-                    <p>Последний вход: {{ request.user.last_login }}</p>
-                    {% if request.user.is_superuser %}
-                        <p>Ваша роль: Администратор</p>
-                        <div class="site-button btn-one" onclick="window.location.href='{% url 'admin:index' %}'"><a>Перейти в админку</a></div>
-                    {% endif %}
                 </div>
-
+                {% if master_socials %}
+                <div class="master">
+                    <ul class="list-socials">
+                            {% for social in master_socials %}
+                            <li class="list-socials">
+                                <h6 class="mb-0"><img src="{{ social.icon.icon.url }}" alt="" style="height: 50px;"></svg>{{ social.name }}</h6>
+                                <span class=""><a href="{{ social.link }}" target="_blank">Ссылака</a></span>
+                            </li>
+                            {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
   </div>
+  <style>
+    .profile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 20px;
+        gap: 20px;
+        flex-direction: column;
+    }
+    .user-info {
+        display: flex;
+    }
+    @media screen and (max-width: 600px) {
+        .user-info {
+            flex-direction: column;
+        }
+    }
+    .col-md-8 {
+        width: 100%;
+    }
+    .row {
+       display: flex;
+       flex-direction: row;
+       justify-content: center;
+       align-items: baseline;
+    }
+  </style>

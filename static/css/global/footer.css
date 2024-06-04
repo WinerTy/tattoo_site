@@ -37,13 +37,6 @@ footer {
     justify-content: space-between;
     align-items: center;
   }
-
-  @media screen and (max-width: 768px) {
-    .map {
-      display: none;
-    }
-  }
-
   #map {
     width: 800px;
     height: 200px;
@@ -57,6 +50,19 @@ footer {
     border-radius: 10px;
     background: #FFF;
   }
+
+  @media screen and (max-width: 320px) {
+    .map, #map {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .map, #map {
+      display: none;
+    }
+    
+  }
+
 
   .links {
     order: 1; /* Сначала отображаем ссылки */

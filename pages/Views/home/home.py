@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from database.models import Master, Slider, SocialAccount
+from database.models import Master, Slider
 from site_setting.models import AboutBlock
 from pages.forms import AppointmentForm, SelectSalonForm, MasterForm
 from pages.misc.page_info import (
@@ -27,8 +27,6 @@ def main(request):
     abouts = AboutBlock.objects.all()[:3]
     if request.user.is_authenticated:
         user_master = Master.objects.filter(user=request.user).first()
-        master_socials = SocialAccount.objects.filter(master=user_master)
-        data["master_socials"] = master_socials
         data["change_form"] = ChangeForm(instance=request.user)
         data["master_info"] = get_master_info(request.user)
         data["master_form"] = MasterForm(instance=user_master)

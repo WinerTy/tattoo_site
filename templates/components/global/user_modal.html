@@ -8,7 +8,6 @@
             {% if 'Мастер' in request.user.groups.all|join:", " %}
             <!-- Добавляем новую кнопку, если пользователь в группе "Мастер" -->
             <div class="site-button btn-one tablinks" onclick="openTab(event, 'master')"><a>Мастер</a></div>
-            <div class="site-button btn-one tablinks" onclick="openTab(event, 'appointments')"><a href="#UserModal" data-href="asdasd">Последние записи</a></div>
             {% endif %}
             
             <div class="site-button btn-one tablinks" onclick="openTab(event, 'logout')"><a>Выход</a></div>
@@ -33,6 +32,10 @@
   <style>
     .tab-form {
         display: flex;
+        width: 100%;
+    }
+    .tab-form form {
+        width: 100%;
     }
     .tabcontent {
         flex-direction: column;

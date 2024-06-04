@@ -63,18 +63,6 @@
                       </div>
                 </div>
                 </div>
-                {% if master_socials %}
-                <div class="master">
-                    <ul class="list-socials">
-                            {% for social in master_socials %}
-                            <li class="list-socials">
-                                <h6 class="mb-0"><img src="{{ social.icon.icon.url }}" alt="" style="height: 50px;"></svg>{{ social.name }}</h6>
-                                <span class=""><a href="{{ social.link }}" target="_blank">Ссылака</a></span>
-                            </li>
-                            {% endfor %}
-                    </ul>
-                </div>
-                {% endif %}
             </div>
         </div>
     </div>

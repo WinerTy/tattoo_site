@@ -18,6 +18,12 @@ from .Views.Master.master_info import (
     get_form_appointment,
     create_appointmentv2,
 )
+from .misc.render_forms import (
+    render_login_form,
+    render_register_form,
+    render_salon_form,
+    render_settings_form,
+)
 
 urlpatterns = [
     path("", main, name="home"),
@@ -31,8 +37,12 @@ urlpatterns = [
     path("consultation/", create_appointment, name="consultation"),
     path("update_master/", update_master_info, name="update_master"),
     path("filter_sessions/", filter_sessions, name="filter_sessions"),
-    path("get_form_review/", get_form_review, name="get_form_review"),
     path("create_rewiew/", create_rewiew, name="create_rewiew"),
-    path("get_form_appointment/", get_form_appointment, name="get_form_appointment"),
     path("create_appointmentv2/", create_appointmentv2, name="create_appointmentv2"),
+    path("get_form_appointment/", get_form_appointment, name="get_form_appointment"),
+    path("get_form_review/", get_form_review, name="get_form_review"),
+    path("get_login_form/", render_login_form, name="get_login_form"),
+    path("get_register_form/", render_register_form, name="get_register_form"),
+    path("get_salon_form/", render_salon_form, name="get_salon_form"),
+    path("get_settings_form/", render_settings_form, name="get_settings_form"),
 ]

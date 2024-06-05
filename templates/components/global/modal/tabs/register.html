@@ -1,13 +1,17 @@
 <div id="register" class="tabcontent">
-    <h2>Регистрация</h2>
-    <form action="{% url 'user_register' %}" method="post" class="modal-register">
-        {% csrf_token %}
-        {{register_form.as_p}}
-        <button type="submit" class="submit-button"><span>Зарегистрироваться</span><em>Зарегистрироваться</em></button>
-    </form>
-  </div>
 </div>
-
+<script>
+  function RenderTab() {
+    $.ajax({
+        url: "{% url 'get_register_form' %}",
+        type: 'GET',
+        success: function(data) {
+            $('#register').html(data);
+        }
+    });
+}
+RenderTab();
+</script>
 <style>
   @media screen and (max-width: 600px) {
     .modal-register {

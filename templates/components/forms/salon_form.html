@@ -1,0 +1,5 @@
+<form class="modal-form" id="salonForm" method="post" action="{% url 'select_salon' %}">
+    {% csrf_token %}
+    {{form.as_div}}
+  <button type="submit" class="submit-button"><span>Выбрать</span><em id="selectedSalon">Выбранный салон:</em></button>
+  </form> 

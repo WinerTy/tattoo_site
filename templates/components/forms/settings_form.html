@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'user_change' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="submit-button"><span>Сохранить</span><em>Сохранить изменения</em></button>
+</form>

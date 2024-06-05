@@ -1,8 +1,15 @@
 <div id="login" class="tabcontent">
-    <h2>Вход</h2>
-    <form method="post" action="{% url 'user_login' %}">
-        {% csrf_token %}
-        {{login_form.as_p}}
-        <button type="submit" class="submit-button"><span>Войти</span><em>Авторизоваться</em></button>
-    </form>
-  </div>
+</div>
+
+<script>
+    function RenderTab() {
+        $.ajax({
+            url: "{% url 'get_login_form' %}",
+            type: 'GET',
+            success: function(data) {
+                $('#login').html(data);
+            }
+        });
+    }
+    RenderTab();
+</script>

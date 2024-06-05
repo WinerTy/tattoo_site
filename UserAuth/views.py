@@ -1,15 +1,9 @@
-from django.shortcuts import render
-
-from django.template.loader import render_to_string
-
 from django.contrib.auth import login, authenticate, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import redirect
 from pages.misc.create_message import create_message
 from .forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
-    CustomUserChangeForm,
     ChangeForm,
 )
 

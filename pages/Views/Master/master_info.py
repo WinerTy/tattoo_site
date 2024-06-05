@@ -4,14 +4,11 @@ from django.urls import reverse
 from database.models import Master, SocialAccount, Session
 
 from UserAuth.forms import (
-    CustomUserCreationForm,
     CustomAuthenticationForm,
     ChangeForm,
 )
 from pages.misc.page_info import check_groups
 from pages.forms import SelectSalonForm, MasterForm, MasterReviewForm, AppointmentV2Form
-
-from icecream import ic
 
 
 class MasterInfo(DetailView):
@@ -32,10 +29,6 @@ class MasterInfo(DetailView):
             context["change_form"] = ChangeForm(instance=self.request.user)
             context["master_form"] = MasterForm(instance=user_master)
             context["is_master"] = check_groups(self.request, "Мастер")
-            # context["review_form"] = MasterReviewForm()
-        else:
-            context["login_form"] = CustomAuthenticationForm()
-            context["register_form"] = CustomUserCreationForm()
         return context
 
 

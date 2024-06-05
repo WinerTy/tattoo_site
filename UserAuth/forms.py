@@ -46,32 +46,6 @@ class CustomUserCreationForm(UserCreationForm):
         )
 
 
-class CustomUserChangeForm(UserChangeForm):
-    password = forms.CharField(
-        label="",
-        widget=forms.PasswordInput(
-            attrs={"class": "form-control", "placeholder": "Пароль"}
-        ),
-        required=False,  # Поле становится необязательным
-    )
-
-    class Meta:
-        model = CustomUser
-        fields = ("username", "email", "password")
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for fieldname in ["username", "email", "password"]:
-            self.fields[fieldname].help_text = None
-            self.fields[fieldname].label = ""
-            self.fields[fieldname].widget.attrs.update({"class": "form-control"})
-            self.fields[fieldname].required = False
-
-        self.fields["username"].widget.attrs.update({"placeholder": "Логин"})
-        self.fields["email"].widget.attrs.update({"placeholder": "Электронная почта"})
-        self.fields["password"].widget.attrs.update({"placeholder": "Пароль"})
-
-
 class ChangeForm(forms.ModelForm):
 
     class Meta:

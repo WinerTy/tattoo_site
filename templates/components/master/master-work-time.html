@@ -7,8 +7,6 @@
     {% else %}
             <h3 class="text">Мастер пока не принимает </h3>
     {% endif %}
-        
-
 </div>
 
 <div id="sessions-container" class="sessions">
@@ -16,44 +14,64 @@
 </div>
 
 <script>
+    let startX = 0;
+    let currentX = 0;
+    let isTouching = false;
+
+    const dayButtons = document.getElementById('day-of-week-buttons');
+
+    dayButtons.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    isTouching = true;
+    });
+
+    dayButtons.addEventListener('touchmove', (e) => {
+    if (!isTouching) return;
+    currentX = e.touches[0].clientX;
+    const distance = startX - currentX;
+    dayButtons.scrollLeft += distance;
+    startX = currentX;
+    });
+
+    dayButtons.addEventListener('touchend', () => {
+    isTouching = false;
+    });
+
+    dayButtons.addEventListener('touchcancel', () => {
+    isTouching = false;
+    });
+
     $(document).ready(function() {
-        var firstDay = "{{ days_of_week.0 }}";
-        var masterId = "{{ master.id }}";
+    var firstDay = "{{ days_of_week.0 }}";
+    var masterId = "{{ master.id }}";
 
+    function loadSessions(dayOfWeek, masterId) {
         $.ajax({
-            url: '{% url "filter_sessions" %}',
-            type: 'GET',
-            data: { day_of_week: firstDay, master_id: masterId },
-            success: function(response) {
-                $('#sessions-container').html(response);
-            }
+        url: '{% url "filter_sessions" %}',
+        type: 'GET',
+        data: { day_of_week: dayOfWeek, master_id: masterId },
+        success: function(response) {
+            $('#sessions-container').html(response);
+        }
         });
+    }
 
-        $('.day-button').on('click', function(event) {
-            // Проверяем, является ли кнопка активной
-            if ($(this).hasClass('active')) {
-                // Если кнопка активна, блокируем ее нажатие
-                event.preventDefault();
-                return;
-            }
+    // Загружаем сеансы для первого дня при загрузке страницы
+    loadSessions(firstDay, masterId);
 
-            var dayOfWeek = $(this).data('day');
-            var masterId = $(this).data('master-id');
-            $.ajax({
-                url: '{% url "filter_sessions" %}',
-                type: 'GET',
-                data: { day_of_week: dayOfWeek, master_id: masterId },
-                success: function(response) {
-                    $('#sessions-container').html(response);
-                }
-            });
+    $('.day-button').on('click', function(event) {
+        event.preventDefault();
 
-            // Удаляем класс active со всех кнопок
-            $('.day-button').removeClass('active');
+        if ($(this).hasClass('active')) {
+        return;
+        }
 
-            // Добавляем класс active к выбранной кнопке
-            $(this).addClass('active');
-        });
+        var dayOfWeek = $(this).data('day');
+        loadSessions(dayOfWeek, masterId);
+
+        $('.day-button').removeClass('active');
+        $(this).addClass('active');
+    });
     });
 </script>
 
@@ -84,5 +102,20 @@
     .day-button.active {
         background-color: var(--quaternary);
         cursor: context-menu;
+    }
+    @media screen and (max-width: 600px) {
+        .day-buttons {
+            overflow-x: hidden;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+          }
+          
+          .day-button {
+            display: inline-block;
+            margin-right: 10px;
+          }
+          .sessions {
+            justify-content: center;
+          }
     }
 </style>

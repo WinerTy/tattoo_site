@@ -4,7 +4,7 @@
 <div class="work-card">
     <div class="photo">
         <img src="{{ work.photo.url }}" alt="">
-        <div class="work-info">
+        <div class="work-info text">
             <p>{{ work.name }}</p>
             <p>{{ work.type }}</p>
         </div>
@@ -61,5 +61,46 @@
     
     .work-card:hover .work-info {
         transform: translateY(0);
+    }
+    @media screen and (min-width: 300px) and (max-width: 400px) {
+        .master-works {
+            grid-template-columns: repeat(1, 300px);
+            padding: 20px;
+        }
+        .work-card {
+            width: 280px;
+            height: 280px;
+        }
+    }
+    @media screen and (max-width: 600px) {
+        .master-works {
+            grid-template-columns: repeat(1, 300px);
+            padding: 20px;
+        }
+        .work-card {
+            width: 300px;
+            height: 300px;
+        }
+    }
+    
+    @media screen and (min-width: 601px) and (max-width: 1024px) {
+        .master-works {
+            grid-template-columns: repeat(3, 300px);
+            padding: 20px;
+        }
+        .work-card {
+            width: 300px;
+            height: 300px;
+        }
+    }
+    
+    @media screen and (min-width: 1025px) {
+        .master-works {
+            grid-template-columns: repeat(5, 300px);
+        }
+        .work-card {
+            width: 300px;
+            height: 300px;
+        }
     }
 </style>

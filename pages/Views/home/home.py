@@ -5,7 +5,6 @@ from pages.forms import AppointmentForm, SelectSalonForm, MasterForm
 from pages.misc.page_info import (
     get_contact_info,
     get_random_salon,
-    get_master_info,
     check_groups,
 )
 from UserAuth.forms import (
@@ -29,7 +28,6 @@ def main(request):
     if request.user.is_authenticated:
         user_master = Master.objects.filter(user=request.user).first()
         data["change_form"] = ChangeForm(instance=request.user)
-        data["master_info"] = get_master_info(request.user)
         data["master_form"] = MasterForm(instance=user_master)
         data["is_master"] = check_groups(request, "Мастер")
     else:

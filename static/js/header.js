@@ -25,6 +25,13 @@ function checkUrlForModal() {
       modalButton.click();
     }
   }
+  if (currentUrl.includes("#AppointmentModal")) {
+    var modalButton = document.getElementById("OpenAppointmentModal");
+    
+    if (modalButton) {
+      modalButton.click();
+    }
+  }
 }
 
 window.onload = checkUrlForModal;

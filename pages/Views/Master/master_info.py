@@ -1,15 +1,17 @@
 from django.views.generic import DetailView
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from database.models import Master, SocialAccount, Session
 
-from pages.forms import SelectSalonForm
 from UserAuth.forms import (
     CustomUserCreationForm,
     CustomAuthenticationForm,
     ChangeForm,
 )
-from pages.misc.page_info import get_master_info, check_groups
-from pages.forms import SelectSalonForm, MasterForm
+from pages.misc.page_info import check_groups
+from pages.forms import SelectSalonForm, MasterForm, MasterReviewForm, AppointmentV2Form
+
+from icecream import ic
 
 
 class MasterInfo(DetailView):
@@ -28,9 +30,9 @@ class MasterInfo(DetailView):
         if self.request.user.is_authenticated:
             user_master = Master.objects.filter(user=self.request.user).first()
             context["change_form"] = ChangeForm(instance=self.request.user)
-            context["master_info"] = get_master_info(self.request.user)
             context["master_form"] = MasterForm(instance=user_master)
             context["is_master"] = check_groups(self.request, "Мастер")
+            # context["review_form"] = MasterReviewForm()
         else:
             context["login_form"] = CustomAuthenticationForm()
             context["register_form"] = CustomUserCreationForm()
@@ -42,3 +44,59 @@ def filter_sessions(request):
     day_of_week = request.GET.get("day_of_week")
     sessions = Session.objects.filter(master__pk=master_id, day_of_week=day_of_week)
     return render(request, "components/master/sessions.html", {"times": sessions})
+
+
+def get_form_review(request):
+    if request.user.is_authenticated:
+        master_id = request.GET.get("master_id")
+        return render(
+            request,
+            "components/master/review_form.html",
+            {"form": MasterReviewForm(), "master_id": master_id},
+        )
+    else:
+        return render(
+            request,
+            "components/master/review_form.html",
+            {"form": CustomAuthenticationForm()},
+        )
+
+
+def create_appointmentv2(request):
+    if request.method == "POST":
+        master = Master.objects.get(id=request.POST.get("master_id"))
+        form = AppointmentV2Form(request.POST, master=master)
+        path = request.META.get("HTTP_REFERER", reverse("home"))
+        if form.is_valid():
+            app = form.save(commit=False)
+            app.master = master
+            app.user = request.user
+            app.session = form.cleaned_data.get("session")
+            app.save()
+            return redirect(path)
+    return redirect("master_info", pk=master.pk)
+
+
+def get_form_appointment(request):
+    master = Master.objects.get(id=request.GET.get("master_id"))
+    form = AppointmentV2Form(master=master)
+    return render(
+        request,
+        "components/forms/appointment.html",
+        {"form": form, "master_id": master.pk},
+    )
+
+
+def create_rewiew(request):
+    if request.method == "POST":
+        master_id = request.POST.get("master_id")
+        master = Master.objects.get(pk=master_id)
+        form = MasterReviewForm(request.POST)
+        path = request.META.get("HTTP_REFERER", reverse("home"))
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.master = master
+            review.user = request.user
+            review.save()
+            return redirect(path)
+    return redirect(path)

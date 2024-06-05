@@ -10,8 +10,8 @@ def create_appointment(request):
             request.POST, salon_pk=request.session.get("salon").get("pk")
         )
         if form.is_valid():
-            appointment = form.save(commit=False)
-            appointment.save()
+            consultation = form.save(commit=False)
+            consultation.save()
             request.session["message"] = create_message(
                 "success", "Запись успешно создана!"
             )

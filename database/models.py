@@ -100,7 +100,7 @@ class Session(models.Model):
         verbose_name_plural = "Сеансы"
 
     def __str__(self):
-        return f"Сеанс {self.master.name} на {self.get_day_of_week_display()}"
+        return f"Сеанс {self.day_of_week} {self.start_time} - {self.end_time}"
 
 
 class SocialAccount(models.Model):
@@ -128,7 +128,7 @@ class SocialAccount(models.Model):
         return self.link
 
 
-class Appointment(models.Model):
+class Consultation(models.Model):
     master = models.ForeignKey(Master, on_delete=models.CASCADE)
     types = models.ManyToManyField(
         TattooType,
@@ -144,8 +144,49 @@ class Appointment(models.Model):
     )
 
     class Meta:
+        verbose_name = "Консультация"
+        verbose_name_plural = "Консультация"
+
+    def __str__(self):
+        return self.client_email
+
+
+class MasterReview(models.Model):
+    RATING = ((1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5"))
+    master = models.ForeignKey(Master, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    rating = models.IntegerField(choices=RATING)
+    text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Отзыв"
+        verbose_name_plural = "Отзывы"
+
+    def __str__(self):
+        return self.user.username
+
+
+class AppointmentV2(models.Model):
+    user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        verbose_name="Пользователь",
+        blank=True,
+        null=True,
+    )
+    session = models.ForeignKey(Session, on_delete=models.CASCADE)
+    client_email = models.EmailField()
+    client_phone = models.CharField(max_length=20)
+    created_at = models.DateTimeField(auto_now_add=True)
+    client_name = models.CharField(max_length=100)
+    status = models.BooleanField(
+        default=False, verbose_name="Ответил", help_text="Мастер дал ответ клиенту"
+    )
+
+    class Meta:
         verbose_name = "Запись"
         verbose_name_plural = "Записи"
 
     def __str__(self):
-        return self.client_email
+        return self.user.username

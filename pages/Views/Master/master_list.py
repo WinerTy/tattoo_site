@@ -10,7 +10,6 @@ from UserAuth.forms import (
 )
 from pages.misc.page_info import (
     get_random_salon,
-    get_master_info,
     check_groups,
 )
 from pages.forms import SelectSalonForm, MasterForm
@@ -28,7 +27,6 @@ class MastersView(ListView):
         if self.request.user.is_authenticated:
             user_master = Master.objects.filter(user=self.request.user).first()
             context["change_form"] = ChangeForm(instance=self.request.user)
-            context["master_info"] = get_master_info(self.request.user)
             context["master_form"] = MasterForm(instance=user_master)
             context["is_master"] = check_groups(self.request, "Мастер")
         else:

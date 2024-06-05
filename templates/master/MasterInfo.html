@@ -18,27 +18,31 @@
         <img src="{{ master.photo.url }}" alt="">
     </div>
 </section>
-<section class="master-work-time base">
-    {% include 'components/master/master-work-time.html' %}
+<section class="master-sub-info base">
+    <div class="working-time">
+        {% include 'components/master/master-work-time.html' %}
+    </div>
+    <div class="master-modal-buttons">
+        {% include 'components/master/master-modal-form.html' %}
+    </div>
 </section>
 <section class="master-works-images base">
-    {% include 'components/master/master-works.html' with works=master.works.all %}
+        {% include 'components/master/master-works.html' with works=master.works.all %}
 </section>
 <style>
-    .master-social, .master-work-time{
+    .master-sub-info{
+        display: flex;
+    }
+    .working-time, .master-modal-buttons, .master-texts, .master-photo{
+        width: 50%;
+    }
+    .master-social, .master-work-time, .working-time, .master-modal-buttons, .master-works-images,.master-info{
         padding: 20px;
     }
     .master-info{
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px;
-    }
-    .master-texts{
-        width: 50%;
-    }
-    .master-photo{
-        width: 50%;
     }
     .master-photo img{
         width: 100%;

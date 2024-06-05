@@ -1,0 +1,56 @@
+
+{% if request.user.is_authenticated %}
+    <h1>Отзыв</h1>
+    <form action="{% url 'create_rewiew' %}" method="post" class="review-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="hidden" name="master_id" value="{{ master_id }}">
+        <div class="succses">
+            <button type="submit" class="submit-button"><span>Оставить отзыв</span><em>Отменить данное действие будет невозможно</em></button>
+            <span class="tooltip-icon">!</span>
+        </div>
+
+    </form>
+{% else %}
+    <h1>Войти в аккаунт</h1>
+    <form action="{% url 'user_login' %}" method="post" class="review-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-button"><span>Войти</span><em>Авторизоваться</em></button>
+    </form>
+{% endif %}
+
+<script>
+    $(document).ready(function() {
+        $('.tooltip-icon').tooltipster({
+            content: 'При отправке отзыва вы соглашаетесь с условиями политики конфиденциальности и пользовательским соглашением. Удалить отзыв самостоятельно невозможно. Отзыв публикуется от имени текущего аккаунта: {{ request.user.username }}',
+            interactive: true,
+            trigger: 'click',
+            position: 'top'
+        });
+    });
+</script>
+
+<style>
+    .review-form {
+        width: max-content;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .review-form textarea {
+        max-height: 200px;
+        min-width: 330px;
+        min-height: 200px;
+        height: 200px;
+    }
+    .tooltip-icon {
+        display: inline-block;
+        font-size: 20px;
+        color: var(--quaternary);
+        cursor: pointer;
+    }
+    .tooltipster-content {
+        background-color: var(--secondary);
+    }
+</style>

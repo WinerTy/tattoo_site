@@ -11,11 +11,17 @@ from .models import (
     TattooType,
     Works,
     Master,
-    Appointment,
+    Consultation,
     SocialAccount,
     Slider,
     Session,
+    MasterReview,
+    AppointmentV2,
 )
+
+
+class ReviewInline(admin.StackedInline):
+    model = MasterReview
 
 
 class SliderAdmin(admin.ModelAdmin):
@@ -58,7 +64,7 @@ class MasterAdmin(admin.ModelAdmin):
     list_filter = [
         "salon",
     ]
-    inlines = [SocialAccountInline, SessionInline]
+    inlines = [SocialAccountInline, SessionInline, ReviewInline]
     formfield_overrides = {
         models.ImageField: {"widget": ImageUploaderWidget},
     }
@@ -67,7 +73,7 @@ class MasterAdmin(admin.ModelAdmin):
         css = {"all": ("css/admin/ImageUploader.css",)}
 
 
-class AppointmentAdmin(admin.ModelAdmin):
+class ConsultationAdmin(admin.ModelAdmin):
     list_display = ["id", "master"]
     list_filter = ["master"]
 
@@ -88,8 +94,9 @@ class AppointmentAdmin(admin.ModelAdmin):
             return []
 
 
+admin.site.register(AppointmentV2)
 admin.site.register(Works)
 admin.site.register(Master, MasterAdmin)
-admin.site.register(Appointment, AppointmentAdmin)
+admin.site.register(Consultation, ConsultationAdmin)
 admin.site.register(Slider, SliderAdmin)
 admin.site.register(TattooType)

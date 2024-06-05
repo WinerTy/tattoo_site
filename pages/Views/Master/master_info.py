@@ -26,7 +26,6 @@ class MasterInfo(DetailView):
         context["salon_form"] = SelectSalonForm()
         if self.request.user.is_authenticated:
             user_master = Master.objects.filter(user=self.request.user).first()
-            context["change_form"] = ChangeForm(instance=self.request.user)
             context["master_form"] = MasterForm(instance=user_master)
             context["is_master"] = check_groups(self.request, "Мастер")
         return context

@@ -3,11 +3,7 @@ from django.views.generic import ListView
 from database.models import Master
 
 from pages.forms import SelectSalonForm
-from UserAuth.forms import (
-    CustomUserCreationForm,
-    CustomAuthenticationForm,
-    ChangeForm,
-)
+
 from pages.misc.page_info import (
     get_random_salon,
     check_groups,
@@ -26,12 +22,8 @@ class MastersView(ListView):
         context["salon_form"] = SelectSalonForm()
         if self.request.user.is_authenticated:
             user_master = Master.objects.filter(user=self.request.user).first()
-            context["change_form"] = ChangeForm(instance=self.request.user)
             context["master_form"] = MasterForm(instance=user_master)
             context["is_master"] = check_groups(self.request, "Мастер")
-        else:
-            context["login_form"] = CustomAuthenticationForm()
-            context["register_form"] = CustomUserCreationForm()
         return context
 
     def get_queryset(self):

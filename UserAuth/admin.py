@@ -36,7 +36,7 @@ class CustomUserAdmin(admin.ModelAdmin):
     filter_horizontal = ("groups", "user_permissions")
 
     class Media:
-        js = ("js/admin.js",)
+        js = ("js/misc/masks.js",)
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)

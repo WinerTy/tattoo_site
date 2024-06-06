@@ -5,7 +5,6 @@ from database.models import Master, SocialAccount, Session
 
 from UserAuth.forms import (
     CustomAuthenticationForm,
-    ChangeForm,
 )
 from pages.misc.page_info import check_groups
 from pages.forms import SelectSalonForm, MasterForm, MasterReviewForm, AppointmentV2Form
@@ -23,7 +22,6 @@ class MasterInfo(DetailView):
         context["days_of_week"] = sessions.values_list(
             "day_of_week", flat=True
         ).distinct()
-        context["salon_form"] = SelectSalonForm()
         if self.request.user.is_authenticated:
             user_master = Master.objects.filter(user=self.request.user).first()
             context["master_form"] = MasterForm(instance=user_master)

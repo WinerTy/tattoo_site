@@ -4,7 +4,8 @@ from UserAuth.forms import (
     CustomAuthenticationForm,
     ChangeForm,
 )
-from pages.forms import SelectSalonForm
+from database.models import Master
+from pages.forms import SelectSalonForm, MasterForm
 
 
 def render_login_form(request):
@@ -36,4 +37,13 @@ def render_settings_form(request):
         request,
         "components/forms/settings_form.html",
         {"form": ChangeForm(instance=request.user)},
+    )
+
+
+def render_master_form(request):
+    user_master = Master.objects.filter(user=request.user).first()
+    return render(
+        request,
+        "components/forms/master_form.html",
+        {"form": MasterForm(instance=user_master)},
     )

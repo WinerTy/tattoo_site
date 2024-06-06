@@ -23,6 +23,7 @@ from .misc.render_forms import (
     render_register_form,
     render_salon_form,
     render_settings_form,
+    render_master_form,
 )
 
 urlpatterns = [
@@ -45,4 +46,5 @@ urlpatterns = [
     path("get_register_form/", render_register_form, name="get_register_form"),
     path("get_salon_form/", render_salon_form, name="get_salon_form"),
     path("get_settings_form/", render_settings_form, name="get_settings_form"),
+    path("get_master_form/", render_master_form, name="get_master_form"),
 ]

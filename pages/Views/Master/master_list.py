@@ -21,8 +21,6 @@ class MastersView(ListView):
         context = super().get_context_data(**kwargs)
         context["salon_form"] = SelectSalonForm()
         if self.request.user.is_authenticated:
-            user_master = Master.objects.filter(user=self.request.user).first()
-            context["master_form"] = MasterForm(instance=user_master)
             context["is_master"] = check_groups(self.request, "Мастер")
         return context
 

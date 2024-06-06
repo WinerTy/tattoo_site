@@ -1,9 +1,15 @@
 
 <div id="master" class="tabcontent">
-    <h1>Мастер</h1>
-    <form action="{% url 'update_master' %}" method="post">
-        {% csrf_token %}
-        {{master_form.as_p}}
-        <button type="submit" class="submit-button"><span>Изменить</span><em>Данные о мастере будут изменены</em></button>
-    </form>
 </div>
+<script>
+    function RenderTab() {
+        $.ajax({
+            url: "{% url 'get_master_form' %}",
+            type: 'GET',
+            success: function(data) {
+                $('#master').html(data);
+            }
+        });
+    }
+    RenderTab();
+</script>

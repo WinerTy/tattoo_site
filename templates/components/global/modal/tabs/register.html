@@ -1,16 +1,7 @@
 <div id="register" class="tabcontent">
 </div>
 <script>
-  function RenderTab() {
-    $.ajax({
-        url: "{% url 'get_register_form' %}",
-        type: 'GET',
-        success: function(data) {
-            $('#register').html(data);
-        }
-    });
-}
-RenderTab();
+  RenderTab("{% url 'get_register_form' %}", "register");
 </script>
 <style>
   @media screen and (max-width: 600px) {

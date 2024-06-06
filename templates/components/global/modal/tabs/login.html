@@ -2,14 +2,5 @@
 </div>
 
 <script>
-    function RenderTab() {
-        $.ajax({
-            url: "{% url 'get_login_form' %}",
-            type: 'GET',
-            success: function(data) {
-                $('#login').html(data);
-            }
-        });
-    }
-    RenderTab();
+    RenderTab("{% url 'get_login_form' %}", "login");
 </script>

@@ -1,3 +1,4 @@
+{% load static %}
 <div id="modal" class="modal">
     <div class="modal-content">
       <div class="modal-title">
@@ -9,15 +10,7 @@
       </div>
     </div>
 </div>
+<script src="{% static 'js/modal.js' %}"></script>
 <script>
-  function RenderTab() {
-    $.ajax({
-        url: "{% url 'get_salon_form' %}",
-        type: 'GET',
-        success: function(data) {
-            $('#salon').html(data);
-        }
-    });
-}
-RenderTab();
+RenderTab("{% url 'get_salon_form' %}", "salon");
 </script>

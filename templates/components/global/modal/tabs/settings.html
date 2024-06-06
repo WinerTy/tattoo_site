@@ -6,16 +6,7 @@
   </div>
 <script src="{% static 'js/admin.js' %}"></script>
 <script>
-    function RenderTab() {
-        $.ajax({
-            url: "{% url 'get_settings_form' %}",
-            type: 'GET',
-            success: function(data) {
-                $('#settings-form').html(data);
-            }
-        });
-    }
-    RenderTab();
+    RenderTab("{% url 'get_settings_form' %}", "settings");
 </script>
 <style>
     .settings-form {

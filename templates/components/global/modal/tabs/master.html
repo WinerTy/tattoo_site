@@ -2,14 +2,5 @@
 <div id="master" class="tabcontent">
 </div>
 <script>
-    function RenderTab() {
-        $.ajax({
-            url: "{% url 'get_master_form' %}",
-            type: 'GET',
-            success: function(data) {
-                $('#master').html(data);
-            }
-        });
-    }
-    RenderTab();
+    RenderTab("{% url 'get_master_form' %}", "master");
 </script>

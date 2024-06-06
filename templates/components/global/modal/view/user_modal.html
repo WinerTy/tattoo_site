@@ -1,4 +1,63 @@
 {% load static %}
+<style>
+  .tab-form {
+      display: flex;
+      width: 100%;
+  }
+  .tab-form form {
+      width: 100%;
+  }
+  .tabcontent {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+  }
+  .column {
+      float: left;
+      width: 50%;
+      box-sizing: border-box;
+  }
+  
+  .user-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      
+  }
+  .tab {
+      display: flex;
+      flex-direction: column;
+      width: 30%;
+  }
+    
+    .tab div:hover {
+      background-color: var(--secondary);
+    }
+    
+    .tab div.active {
+      background-color: var(--secondary);
+    }
+    
+    .tabcontent {
+      display: none;
+      border: 1px solid var(--white);
+      width: 100%;
+      
+    }
+
+    @media screen and (max-width: 750px) {
+      .tab {
+          width: 100%;
+      }
+      .user-content {
+          flex-direction: column;
+      }
+      .settings-form {
+          width: 100%;
+      }
+    }
+
+</style>
 <div id="UserModal" class="modal base">
     <div class="modal-content user-content">
       <div class="tab">
@@ -33,62 +92,4 @@
 
       <span id="close" class="close modal-close">&times;</span>
   </div>
-  <style>
-    .tab-form {
-        display: flex;
-        width: 100%;
-    }
-    .tab-form form {
-        width: 100%;
-    }
-    .tabcontent {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .column {
-        float: left;
-        width: 50%;
-        box-sizing: border-box;
-    }
-    
-    .user-content {
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        
-    }
-    .tab {
-        display: flex;
-        flex-direction: column;
-        width: 30%;
-    }
-      
-      .tab div:hover {
-        background-color: var(--secondary);
-      }
-      
-      .tab div.active {
-        background-color: var(--secondary);
-      }
-      
-      .tabcontent {
-        display: none;
-        border: 1px solid var(--white);
-        width: 100%;
-        
-      }
-
-      @media screen and (max-width: 750px) {
-        .tab {
-            width: 100%;
-        }
-        .user-content {
-            flex-direction: column;
-        }
-        .settings-form {
-            width: 100%;
-        }
-      }
-
-</style>
+  <script src="{% static 'js/user_modal.js' %}"></script>

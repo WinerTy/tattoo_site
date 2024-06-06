@@ -31,7 +31,6 @@ INSTALLED_APPS = [
     "image_uploader_widget",
     "fontawesomefree",
     "django_ckeditor_5",
-    "formtools",
 ]
 
 

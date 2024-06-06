@@ -1,15 +1,7 @@
 version: '3.9'
 services:
-  tattoo:
+  web:
     build: .
-    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn backend.wsgi:application --bind 0.0.0.0:8080 --workers 1"
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --noinput && python manage.py runserver"
     volumes:
-      - ./tattoo:/tattoo
-      - static:/tattoo/staticfiles
-      - media:/tattoo/media
-    env_file:
-      - tattoo/.env
-    ports:
-      - 8080:8080
-    expose:
-      - "8080"
+      - .:/tattoo

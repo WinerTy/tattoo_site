@@ -41,7 +41,7 @@ def get_form_review(request):
         master_id = request.GET.get("master_id")
         return render(
             request,
-            "components/master/review_form.html",
+            "components/forms/review_form.html",
             {"form": MasterReviewForm(), "master_id": master_id},
         )
     else:

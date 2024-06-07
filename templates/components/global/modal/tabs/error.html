@@ -1,0 +1,22 @@
+{% load del %}
+<div class="form-errors">
+    {% if obj_errors %}
+        <ul class="errors">
+            {% for field, mess in obj_errors.items %}
+                <li>{{mess.0}}</li>
+        {% endfor %}
+        </ul>  
+    {% endif %}
+    {% delete_session_variable obj_name %}
+</div>
+
+<style>
+    .form-errors {
+        margin: 20px;
+        width: 330px;
+        color: red;
+      }
+      .errors li{
+          list-style: initial !important;
+      }
+</style>

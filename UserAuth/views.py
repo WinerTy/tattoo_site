@@ -23,6 +23,7 @@ def user_login(request):
                 )
                 return redirect(path)
         else:
+            request.session["login_error"] = form.errors
             request.session["message"] = create_message(
                 "danger", "Неверное имя пользователя или пароль"
             )
@@ -49,8 +50,10 @@ def user_register(request):
             login(request, user)
             return redirect(path)
         else:
-            message = form.errors
-            request.session["message"] = create_message("danger", message)
+            request.session["register_error"] = form.errors
+            request.session["message"] = create_message(
+                "danger", "Произошла ошибка при регистрации"
+            )
             return redirect(path + "#UserModal")
 
     return redirect(path + "#UserModal")

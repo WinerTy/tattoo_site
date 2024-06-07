@@ -1,6 +1,15 @@
+{% load del %}
+
+<div class="reg-form">
+
+</div>
 <h2>Регистрация</h2>
 <form action="{% url 'user_register' %}" method="post" class="modal-register">
     {% csrf_token %}
     {{form.as_p}}
     <button type="submit" class="submit-button"><span>Зарегистрироваться</span><em>Зарегистрироваться</em></button>
 </form>
+
+{% if request.session.register_error %}
+    {% include 'components/global/modal/tabs/error.html' with obj_errors=request.session.register_error obj_name="register_error" %}
+{% endif %}

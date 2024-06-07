@@ -1,6 +1,23 @@
-<h2>Вход</h2>
-<form method="post" action="{% url 'user_login' %}">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit" class="submit-button"><span>Войти</span><em>Авторизоваться</em></button>
-</form>
+<div class="login-form">
+    <h2>Вход</h2>
+    <form method="post" action="{% url 'user_login' %}">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="submit-button"><span>Войти</span><em>Авторизоваться</em></button>
+    </form>
+</div>
+
+{% if request.session.login_error %}
+    {% include 'components/global/modal/tabs/error.html' with obj_errors=request.session.login_error obj_name='login_error'%}
+{% endif %}
+    
+
+<style>
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 20px;
+    }
+</style>

@@ -2,13 +2,11 @@ from django.views.generic import ListView
 
 from database.models import Master
 
-from pages.forms import SelectSalonForm
 
 from pages.misc.page_info import (
     get_random_salon,
     check_groups,
 )
-from pages.forms import SelectSalonForm, MasterForm
 
 
 class MastersView(ListView):
@@ -19,7 +17,6 @@ class MastersView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["salon_form"] = SelectSalonForm()
         if self.request.user.is_authenticated:
             context["is_master"] = check_groups(self.request, "Мастер")
         return context

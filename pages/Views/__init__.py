@@ -5,4 +5,3 @@ from .func.select_salon import select_salon
 from .func.create_appointment import create_appointment
 from .func.debub import clear_session
 from .Works.works_list import WokrView
-from .About.about import AboutInfo, about

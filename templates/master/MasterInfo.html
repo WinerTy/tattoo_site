@@ -4,7 +4,7 @@
 <section class="master-info base">
     <div class="master-texts text">
         <div class="master-title">
-            <h2>{{ master.tattoo_type.first }}</h2>
+            <h2>{% if master.tattoo_type.first %} {{ master.tattoo_type.first }}{%endif%} </h2>
             <h1>{{ master.name }}</h1>
         </div>
         <div class="master-description">

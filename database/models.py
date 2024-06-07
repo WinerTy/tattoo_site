@@ -4,19 +4,6 @@ from UserAuth.models import CustomUser
 from django_ckeditor_5.fields import CKEditor5Field
 
 
-class Slider(models.Model):
-    photo = models.ImageField(upload_to="Slider/", verbose_name="Картинка")
-    title = models.CharField(max_length=50, verbose_name="Заголовок")
-    is_active = models.BooleanField(default=True, verbose_name="Отоброжать")
-
-    class Meta:
-        verbose_name = "Слайдер"
-        verbose_name_plural = "Слайдеры"
-
-    def __str__(self):
-        return self.title
-
-
 class Works(models.Model):
     photo = models.ImageField(upload_to="WorksPhoto/", verbose_name="Фотография")
     name = models.CharField(max_length=30, verbose_name="Название")

@@ -2,6 +2,19 @@ import os
 from django.db import models
 
 
+class Slider(models.Model):
+    photo = models.ImageField(upload_to="Site/Slider/", verbose_name="Картинка")
+    title = models.CharField(max_length=50, verbose_name="Заголовок")
+    is_active = models.BooleanField(default=True, verbose_name="Отоброжать")
+
+    class Meta:
+        verbose_name = "Слайдер"
+        verbose_name_plural = "Слайдеры"
+
+    def __str__(self):
+        return self.title
+
+
 class Salon(models.Model):
     name = models.CharField(max_length=50, verbose_name="Название салона")
     address = models.CharField(max_length=255, verbose_name="Адрес")

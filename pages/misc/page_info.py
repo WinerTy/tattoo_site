@@ -1,6 +1,5 @@
 import random
 from site_setting.models import Contact, Salon, SalonSocial
-from database.models import Master, Consultation
 
 
 def get_random_salon():
@@ -16,6 +15,6 @@ def get_contact_info(salon):
     return data
 
 
-def check_groups(request, name):
+def check_groups(request, name: str) -> bool:
     is_master = request.user.groups.filter(name=name).exists()
     return is_master

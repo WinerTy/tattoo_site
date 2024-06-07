@@ -1,8 +1,6 @@
 from collections.abc import Sequence
-from doctest import master
 from django.contrib import admin
 from django.http import HttpRequest
-from django.utils.html import format_html
 from django.db import models
 
 from image_uploader_widget.widgets import ImageUploaderWidget
@@ -13,7 +11,6 @@ from .models import (
     Master,
     Consultation,
     SocialAccount,
-    Slider,
     Session,
     MasterReview,
     AppointmentV2,
@@ -22,27 +19,6 @@ from .models import (
 
 class ReviewInline(admin.StackedInline):
     model = MasterReview
-
-
-class SliderAdmin(admin.ModelAdmin):
-    list_display = ["id", "title", "show_image", "is_active"]
-    list_display_links = ["id", "title"]
-    formfield_overrides = {
-        models.ImageField: {"widget": ImageUploaderWidget},
-    }
-
-    class Media:
-        css = {"all": ("css/admin/ImageUploader.css",)}
-
-    def show_image(self, obj):
-        image = obj.photo
-        return format_html(
-            '<img src="{}" style="width: 100px; height: 100px; object-fit: cover;" />'.format(
-                image.url
-            )
-        )
-
-    show_image.short_description = "Изображение"
 
 
 class SessionInline(admin.TabularInline):
@@ -98,5 +74,5 @@ admin.site.register(AppointmentV2)
 admin.site.register(Works)
 admin.site.register(Master, MasterAdmin)
 admin.site.register(Consultation, ConsultationAdmin)
-admin.site.register(Slider, SliderAdmin)
+
 admin.site.register(TattooType)

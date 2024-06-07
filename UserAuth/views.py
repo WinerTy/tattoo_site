@@ -49,9 +49,8 @@ def user_register(request):
             login(request, user)
             return redirect(path)
         else:
-            request.session["message"] = create_message(
-                "danger", "Произошла ошибка при регистрации"
-            )
+            message = form.errors
+            request.session["message"] = create_message("danger", message)
             return redirect(path + "#UserModal")
 
     return redirect(path + "#UserModal")

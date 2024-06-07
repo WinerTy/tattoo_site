@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import Contact, AboutBlock, Salon, SocialAccountIcon, SalonSocial
-
+from django.utils.html import format_html
 from django.db import models
+
 from image_uploader_widget.widgets import ImageUploaderWidget
+
+from .models import Contact, AboutBlock, Salon, SocialAccountIcon, SalonSocial, Slider
 
 
 class SalonSocialInline(admin.TabularInline):
@@ -47,6 +49,28 @@ class AboutAdmin(admin.ModelAdmin):
         css = {"all": ("css/admin/ImageUploader.css",)}
 
 
+class SliderAdmin(admin.ModelAdmin):
+    list_display = ["id", "title", "show_image", "is_active"]
+    list_display_links = ["id", "title"]
+    formfield_overrides = {
+        models.ImageField: {"widget": ImageUploaderWidget},
+    }
+
+    class Media:
+        css = {"all": ("css/admin/ImageUploader.css",)}
+
+    def show_image(self, obj):
+        image = obj.photo
+        return format_html(
+            '<img src="{}" style="width: 100px; height: 100px; object-fit: cover;" />'.format(
+                image.url
+            )
+        )
+
+    show_image.short_description = "Изображение"
+
+
 admin.site.register(Salon, SalonAdmin)
+admin.site.register(Slider, SliderAdmin)
 admin.site.register(AboutBlock, AboutAdmin)
 admin.site.register(SocialAccountIcon)

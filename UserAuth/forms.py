@@ -1,11 +1,9 @@
 from django.contrib.auth.forms import (
     UserCreationForm,
     AuthenticationForm,
-    UserChangeForm,
 )
 from .models import CustomUser
 from django import forms
-from django.contrib.auth.hashers import make_password
 
 
 class CustomAuthenticationForm(AuthenticationForm):
@@ -40,9 +38,11 @@ class CustomUserCreationForm(UserCreationForm):
             self.fields[fieldname].widget.attrs.update({"class": "form-control"})
 
         self.fields["username"].widget.attrs.update({"placeholder": "Логин"})
-        self.fields["password1"].widget.attrs.update({"placeholder": "Пароль"})
+        self.fields["password1"].widget.attrs.update(
+            {"placeholder": "Пароль", "maxlength": "100", "minlength": "8"}
+        )
         self.fields["password2"].widget.attrs.update(
-            {"placeholder": "Повторите пароль"}
+            {"placeholder": "Повторите пароль", "maxlength": "100", "minlength": "8"}
         )
 
 

@@ -1,4 +1,4 @@
-#contact {
+  #contact {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -189,7 +189,7 @@
     
     .direct-contact-container {
       margin-top: 60px;
-      max-width: 300px;
+      max-width: 400px;
     }    
     .social-media-list li {
       height: 60px;
@@ -221,7 +221,8 @@
     
     .direct-contact-container {
       margin-top: 60px;
-      max-width: 280px;
+      width: 100%;
+      padding: 20px;
     }  
     .social-media-list {
       left: 0;
@@ -238,33 +239,54 @@
       line-height: 55px;
     }
     .place {
-      margin-left: 30px;
+      margin-left: 0px;
     }
     
     .phone {
-      margin-left: 30px;
+      margin-left: 0px;
     }
     
     .gmail {
-      margin-left: 30px;
+      margin-left: 0px;
+    }
+    .list-item {
+      font-size: 13px;
+    }
+    .list-item i::before{
+      display: none;
     }
   }
-  
+  @media screen and (max-width: 430px) {
+    .direct-contact-container {
+      margin-top: 60px;
+      width: 100%;
+      padding: 20px;
+    }
+    .contact-list {
+      padding-left: 0px;
+      margin-left: 0px;
+  }
+  }
   @media screen and (max-width: 410px) {
+    .direct-contact-container {
+      margin-top: 60px;
+      width: 100%;
+      padding: 20px;
+    }  
     .send-button {
       width: 99%;
     }
     
     .place {
-      margin-left: 20px;
+      margin-left: 0px;
     }
     
     .phone {
-      margin-left: 20px;
+      margin-left: 0px;
     }
     
     .gmail {
-      margin-left: 20px;
+      margin-left: 0px;
     }
     .contact-list {
       padding-left: 0px;

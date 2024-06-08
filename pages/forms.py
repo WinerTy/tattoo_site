@@ -13,7 +13,7 @@ from site_setting.models import Salon
 class ConsultationForm(forms.ModelForm):
     types = forms.ModelMultipleChoiceField(
         queryset=TattooType.objects.all(),
-        widget=forms.SelectMultiple(attrs={"size": 3, "class": "form-control"}),
+        widget=forms.SelectMultiple(attrs={"size": 5, "class": "form-control"}),
         label="Типы тату",
         required=False,
     )

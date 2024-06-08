@@ -23,10 +23,11 @@ from .misc.render_forms import (
     render_settings_form,
     render_master_form,
 )
+from .Views.About.about import AboutPage
 
 urlpatterns = [
     path("", main, name="home"),
-    path("ourworks/", WokrView.as_view(), name="ourworks"),
+    path("about/", AboutPage.as_view(), name="about"),
     path("masters/", MastersView.as_view(), name="masters"),
     path("masters/<int:pk>/", MasterInfo.as_view(), name="master-info"),
     path("select_salon/", select_salon, name="select_salon"),

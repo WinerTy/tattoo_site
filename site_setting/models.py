@@ -1,5 +1,6 @@
 import os
 from django.db import models
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Slider(models.Model):
@@ -77,10 +78,7 @@ class AboutBlock(models.Model):
         verbose_name="Краткое описание",
         help_text="Текст отоброжаемый на главной странице",
     )
-    description = models.TextField(
-        verbose_name="Подробное описание",
-        help_text="текст используемый на подробной странице",
-    )
+    description = CKEditor5Field("Описание", config_name="extends")
 
     class Meta:
         verbose_name = "О нас"

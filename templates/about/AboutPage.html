@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="about base">
+    {% include 'components/about/about_card.html' %}
+    {% include 'components/about/about_salon.html' %}
+  </section>
+<style>
+    .about {
+      padding: 20px;
+    }
+</style>
+{% endblock content %}

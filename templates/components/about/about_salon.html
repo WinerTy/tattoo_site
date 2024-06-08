@@ -1,0 +1,93 @@
+{% load static %}
+<div class="static-salon-text">
+    <h1 class="static-salon-header">Кто мы?</h1>
+    <div class="static-texts">
+        
+        <div class="firts-text text">
+            <p >На данный момент «<span>BARAKA</span>» - это четыре&nbsp;студии в Санкт-Петербурге, объединяющие более тридцати разноплановых мастеров татуировки. Но в каком бы стиле не работали наши мастера, их непременно отличает высокий художественный уровень и уникальный подход к каждой работе. Ведь в нашем представлении, татуировщик – это, прежде всего, художник. На этом принципе мы и формируем свою команду. А опыт работы с 2009 года помогает нам лучше понять оптимальный подход к организации тату студии. В «<span>BARAKA</span>» Вам всегда предложат разработку индивидуального эскиза, внимательно отнесутся к Вашим пожеланиям и, если нужно, оберегут от опрометчивых решений. Также в нашей студии работают опытные мастера перманентного макияжа и мастера по пирсигу, в распоряжении которых превосходные украшения п<span>роизводства Industrial Strength.</span></p>
+        </div>
+        <div class="second-text text">
+            <p>Мы действительно хорошо разбираемся в татуировке и уверены, что именно в осознанном сотрудничестве мастера и клиента рождаются по настоящему хорошие работы! В студии так же работают профессиональные мастера пирсинга и перманентного макияжа. Имеется хороший выбор украшений из титана. Наши администраторы с радостью ответят на Ваши вопросы и проконсультируют в выборе мастера.</p>
+        </div>
+    </div>
+    <div class="director">
+        <div class="director-photo">
+            <img src="{% static 'img/director.jpg' %}" alt="">
+        </div>
+        <div class="director-info">
+            <h1>Основатель</h1>
+            <h2>ДАРЬЯ МАЛИНОВСКАЯ</h2>
+        </div>
+    </div>
+    <div class="ipp-info">
+        <p>Студия художественной татуировки «Барака»<br>ИП Малиновская Дарья<br>ИНН 2198547635262<br>ОГРН 2198547635262</p>
+    </div>
+</div>
+
+<style>
+    .ipp-info {
+        color: var(--secondary);
+    }
+    .director {
+        display: flex;
+        gap: 20px;
+    }
+    .director-photo {
+        width: 400px;
+        height: 800px;
+    }
+    .director-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 30px;
+    }
+    .static-salon-header {
+        height: 45px;
+        width: max-content;
+    }
+
+    .static-salon-header:hover {
+        border-bottom: 1px solid var(--quaternary);
+        transition: color 0.3s ease;
+        color: var(--quaternary) !important;
+    }
+    .static-salon-text {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .static-texts {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    .firts-text, .second-text {
+        width: 50%;
+    }
+    @media screen and (max-width: 600px) {
+        .static-salon-text{
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .static-texts {
+            flex-direction: column;
+        }
+        .firts-text, .second-text {
+            width: 100%;
+        }
+        .director {
+            flex-direction: column-reverse;
+        }
+        .director-photo {
+            width: 100%;
+            height: 400px;
+        }
+        .director-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+</style>

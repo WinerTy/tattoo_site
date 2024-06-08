@@ -60,16 +60,25 @@ footer {
     .map, #map {
       display: none;
     }
+    .footer-body {
+      flex-direction: column;
+      justify-content: center;
+    }
+    .list-link-footer li {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     
   }
 
 
   .links {
-    order: 1; /* Сначала отображаем ссылки */
+    order: 1;
   }
 
   .map {
-    order: 2; /* Потом карту */
+    order: 2;
   }
 
   .copyright {

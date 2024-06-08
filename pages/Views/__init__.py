@@ -6,4 +6,3 @@ from .func.create_consultation import create_consultation
 from .func.debub import clear_session
 from .func.create_review import create_rewiew
 from .func.create_appointment import create_appointment
-from .Works.works_list import WokrView

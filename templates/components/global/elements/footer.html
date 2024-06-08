@@ -1,6 +1,6 @@
 {% load static %}
-<!-- <link rel="stylesheet" href="{% static 'css/global/footer.css'%}">
- type="text/javascript"></script>
+<link rel="stylesheet" href="{% static 'css/global/footer.css'%}">
+<script src="https://api-maps.yandex.ru/2.1/?apikey=d17123bd-3142-47c8-9496-8cb21e6d450f&lang=ru_RU" type="text/javascript"></script>
  <footer class="base">
   <div class="container">
       <div class="footer-body py-3">
@@ -8,7 +8,7 @@
               <ul class="list-link-footer">
                   <h2>Ссылки:</h2>
                   <li class="nav-item"><a href="{% url 'home' %}">Главная</a></li>
-                  <li class="nav-item"><a href="{% url 'home' %}">Мастера</a></li>
+                  <li class="nav-item"><a href="{% url 'masters' %}">Мастера</a></li>
                   <li class="nav-item"><a href="{% url 'about' %}">О нас</a></li>
               </ul>
           </div>
@@ -18,18 +18,6 @@
       </div>
         <p class="copyright text-center text-body-secondary">&copy; 2024 BARAKA, Inc</p>
   </div>
-</footer> -->
-<footer class="base">
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=d17123bd-3142-47c8-9496-8cb21e6d450f&lang=ru_RU" type="text/javascript"></script>
-    <div class="footer-links">
-        <h1>124rwfsa</h1>
-    </div>
-    <div class="copyright">
-        <span>&copy; Все права защищены, BARAKA 2024</span>
-    </div>
-    <div class="map">
-        <div id="map"></div>
-    </div>
 </footer>
 <script>
   ymaps.ready(init);
@@ -49,56 +37,3 @@
       myMap.geoObjects.add(myPlacemark);
   }
 </script>
-<style>
-    footer {
-        position: relative;
-        padding-top: 30px;
-        padding-bottom: 30px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        align-items: end;
-
-        &::before {
-          content: '';
-          width: 100%;
-          position: absolute;
-          top: 1rem;
-          left: 0;
-          height: 5px;
-          border-top: 2px dashed #fff;
-        }
-    }
-    #map {
-        width: 800px;
-        height: 200px;
-      }
-    
-      .map {
-        display: flex;
-        justify-content: center;
-        height: 150px;
-        width: 300px;
-        border-radius: 10px;
-        background: #FFF;
-      }
-      @media screen and (max-width: 320px) {
-        .map, #map {
-          display: none;
-        }
-      }
-      @media screen and (max-width: 768px) {
-        .map, #map {
-          display: none;
-        }
-        
-      }
-      
-      @media screen and (min-width: 320px) and (max-width: 768px) {
-        footer {
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-    }
-</style>

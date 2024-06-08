@@ -102,7 +102,7 @@ class SocialAccount(models.Model):
         verbose_name="Название",
         help_text="Текст который будет отображен вместо ссылки",
     )
-    icon = models.OneToOneField(
+    icon = models.ForeignKey(
         SocialAccountIcon, on_delete=models.CASCADE, verbose_name="Иконка"
     )
     link = models.URLField(verbose_name="Ссылка")

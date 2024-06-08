@@ -11,7 +11,6 @@ from pages.misc.page_info import (
 
 
 def main(request):
-    request.session["salon"] = None
     data = {}
     salon = request.session.get("salon")
     if salon is None:

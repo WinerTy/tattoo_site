@@ -20,14 +20,14 @@
         {% endif %}
     </div>
 </div>
-{% endif %}
-    
-
 <script>
     window.onload = function() {
         setTimeout(function() {
             document.getElementById('notify-body').style.display = 'none';
-            {% delete_session_variable 'message' %}
+            "{% delete_session_variable 'message' %}"
         }, 30000);
     };
 </script>
+{% endif %}
+    
+

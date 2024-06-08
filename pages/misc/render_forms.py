@@ -5,7 +5,7 @@ from UserAuth.forms import (
     ChangeForm,
 )
 from database.models import Master
-from pages.forms import SelectSalonForm, MasterForm
+from pages.forms import SelectSalonForm, MasterForm, AppointmentForm, MasterReviewForm
 
 
 def render_login_form(request):
@@ -47,3 +47,29 @@ def render_master_form(request):
         "components/forms/master_form.html",
         {"form": MasterForm(instance=user_master)},
     )
+
+
+def render_form_appointment(request):
+    master = Master.objects.get(id=request.GET.get("master_id"))
+    form = AppointmentForm(master=master)
+    return render(
+        request,
+        "components/forms/appointment.html",
+        {"form": form, "master_id": master.pk},
+    )
+
+
+def render_form_review(request):
+    if request.user.is_authenticated:
+        master_id = request.GET.get("master_id")
+        return render(
+            request,
+            "components/forms/review_form.html",
+            {"form": MasterReviewForm(), "master_id": master_id},
+        )
+    else:
+        return render(
+            request,
+            "components/master/review_form.html",
+            {"form": CustomAuthenticationForm()},
+        )

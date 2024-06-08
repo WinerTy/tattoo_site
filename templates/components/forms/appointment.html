@@ -1,5 +1,5 @@
 <h2>Запись на прием</h2>
-<form method="post" action="{% url 'create_appointmentv2' %}">
+<form method="post" action="{% url 'create_appointment' %}">
   {% csrf_token %}
   {{ form.as_p }}
   <input type="hidden" name="master_id" value="{{ master_id }}">

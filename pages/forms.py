@@ -10,7 +10,7 @@ from database.models import (
 from site_setting.models import Salon
 
 
-class AppointmentForm(forms.ModelForm):
+class ConsultationForm(forms.ModelForm):
     types = forms.ModelMultipleChoiceField(
         queryset=TattooType.objects.all(),
         widget=forms.SelectMultiple(attrs={"size": 3, "class": "form-control"}),
@@ -129,7 +129,7 @@ class MasterReviewForm(forms.ModelForm):
         }
 
 
-class AppointmentV2Form(forms.ModelForm):
+class AppointmentForm(forms.ModelForm):
     session = forms.ModelChoiceField(
         queryset=Session.objects.none(),
         empty_label="Выберите время сеанса",

@@ -230,3 +230,5 @@ CKEDITOR_5_CONFIGS = {
         }
     },
 }
+
+ADMIN_EMAIL = "lLpDv@example.com"

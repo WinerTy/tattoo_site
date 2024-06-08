@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="error base">
+        <div class="error-text">
+            <h1>Произошла ошибка</h1>
+            <p>Повторите попытку позже, если ошибка повторяется пожалуйста, обратитесь к администратору <a href="mailto:{{ admin_email }}">{{ admin_email }}</a></p>
+        </div>
+    </section>
+{% endblock content %}

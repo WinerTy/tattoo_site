@@ -154,7 +154,7 @@ class MasterReview(models.Model):
         return self.user.username
 
 
-class AppointmentV2(models.Model):
+class Appointment(models.Model):
     user = models.ForeignKey(
         CustomUser,
         on_delete=models.CASCADE,
@@ -162,6 +162,7 @@ class AppointmentV2(models.Model):
         blank=True,
         null=True,
     )
+    master = models.ForeignKey(Master, on_delete=models.CASCADE)
     session = models.ForeignKey(Session, on_delete=models.CASCADE)
     client_email = models.EmailField()
     client_phone = models.CharField(max_length=20)

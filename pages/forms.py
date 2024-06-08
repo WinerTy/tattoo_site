@@ -5,7 +5,7 @@ from database.models import (
     TattooType,
     MasterReview,
     Session,
-    AppointmentV2,
+    Appointment,
 )
 from site_setting.models import Salon
 
@@ -138,7 +138,7 @@ class AppointmentForm(forms.ModelForm):
     )
 
     class Meta:
-        model = AppointmentV2
+        model = Appointment
         fields = ["client_email", "client_phone", "client_name"]
         labels = {
             "client_email": "",

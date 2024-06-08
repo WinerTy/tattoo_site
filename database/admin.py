@@ -1,7 +1,6 @@
-from collections.abc import Sequence
 from django.contrib import admin
-from django.http import HttpRequest
 from django.db import models
+
 
 from image_uploader_widget.widgets import ImageUploaderWidget
 
@@ -13,8 +12,36 @@ from .models import (
     SocialAccount,
     Session,
     MasterReview,
-    AppointmentV2,
+    Appointment,
 )
+
+
+class ConsultationInline(admin.TabularInline):
+    model = Consultation
+
+    def has_existing_obj(self, obj):
+        return self.model.objects.all().exists()
+
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 2
+        elif self.has_existing_obj(obj):
+            return 1
+        return 2
+
+
+class AppointmentInline(admin.TabularInline):
+    model = Appointment
+
+    def has_existing_obj(self, obj):
+        return self.model.objects.all().exists()
+
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 2
+        elif self.has_existing_obj(obj):
+            return 1
+        return 2
 
 
 class ReviewInline(admin.StackedInline):
@@ -23,6 +50,17 @@ class ReviewInline(admin.StackedInline):
 
 class SessionInline(admin.TabularInline):
     model = Session
+    extra = 0
+
+    def has_existing_obj(self, obj):
+        return self.model.objects.all().exists()
+
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 2
+        elif self.has_existing_obj(obj):
+            return 1
+        return 2
 
 
 class SocialAccountInline(admin.TabularInline):
@@ -34,13 +72,29 @@ class SocialAccountInline(admin.TabularInline):
     class Media:
         css = {"all": ("css/admin/ImageUploader.css",)}
 
+    def has_existing_obj(self, obj):
+        return self.model.objects.all().exists()
+
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 2
+        elif self.has_existing_obj(obj):
+            return 1
+        return 2
+
 
 class MasterAdmin(admin.ModelAdmin):
     list_display = ["id", "name"]
     list_filter = [
         "salon",
     ]
-    inlines = [SocialAccountInline, SessionInline, ReviewInline]
+    inlines = [
+        SocialAccountInline,
+        SessionInline,
+        ReviewInline,
+        AppointmentInline,
+        ConsultationInline,
+    ]
     formfield_overrides = {
         models.ImageField: {"widget": ImageUploaderWidget},
     }
@@ -53,16 +107,17 @@ class ConsultationAdmin(admin.ModelAdmin):
     list_display = ["id", "master"]
     list_filter = ["master"]
 
-    def get_queryset(self, request):
-        qs = super().get_queryset(request)
-        if request.user.is_superuser:
-            return qs
-        master = Master.objects.filter(user=request.user).first()
-        if master:
-            return qs.filter(master=master)
-        return qs.none()
+    def has_existing_obj(self, obj):
+        return self.model.objects.all().exists()
 
-    def get_list_filter(self, request: HttpRequest) -> Sequence[str]:
+    def get_extra(self, request, obj=None, **kwargs):
+        if obj is None:
+            return 2
+        elif self.has_existing_obj(obj):
+            return 1
+        return 2
+
+    def get_list_filter(self, request):
         if request.user.is_superuser:
             return super().get_list_filter(request)
         master = Master.objects.filter(user=request.user).first()
@@ -70,9 +125,8 @@ class ConsultationAdmin(admin.ModelAdmin):
             return []
 
 
-admin.site.register(AppointmentV2)
 admin.site.register(Works)
 admin.site.register(Master, MasterAdmin)
-admin.site.register(Consultation, ConsultationAdmin)
-
 admin.site.register(TattooType)
+admin.site.site_title = "BARAKA tattoo"
+admin.site.site_header = "BARAKA tattoo"
